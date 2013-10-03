@@ -7,6 +7,15 @@ single: true
 <article class="hentry" role="article">
   {% include article.html %}
   <footer>
+    <div>
+      <div style="float: left; width: 45%">
+        {% include post/revision.html %}
+      </div>
+      <div style="float: right; width: 45%">
+        {% include post/related.html %} 
+      </div>
+    </div>
+ 
     <p class="meta">
       {% include post/author.html %}
       {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
