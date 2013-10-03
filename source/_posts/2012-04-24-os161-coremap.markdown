@@ -1,0 +1,116 @@
+---
+comments: true
+date: 2012-04-24 21:35:28
+layout: post
+title: OS161 Coremap
+categories: [os161]
+tags: [vm, coremap]
+---
+
+The first concern of OS161 virtual memory system is how to manage physical
+pages. Generally, we can pack a physical page's information into a structure
+(called `struct page`) and **use this struct to represent a physical page**. 
+**We use an array of `struct page` to keep all physical pages information.** 
+This array, aka, **coremap**, will be the most important data structure in this lab.
+
+<!-- more -->
+
+### What should we store in page structure?
+
+For each physical page, we want to know:
+
+- Where is this page mapped?
+
+- What's this pages status? (free, clean, dirty...)
+
+- Other info (e.g. need by paging algorithm)
+
+So the definition of `struct page` may look like this:
+
+```
+struct page { 
+    /* where is paged mapped to */
+    struct addrspace* as; 
+    vaddr_t va;
+
+    /* page state */ 
+    page_state_t state;
+
+    /* for paging algorithm 
+     * I use FIFO paging, so a timestamp will be suffice    
+     */
+    uint64_t timestamp; 
+};
+```
+
+A page can have for different states, as shown below.
+
+{% img center /images/2012-04-24-page-state.png %}
+
+This diagram is quite clear. Several points though:
+
+- Once a physical page is allocated, its state is DIRTY, not CLEAN. Since this
+page do not have a copy in swap file (disk). Remember that in a virtual memory
+system, memory is just a cache of disk.
+
+- For some reason, we may want to always keep a certain page in memory, e.g.
+    - kernel pages, since these pages are direct mapped 
+    - user stack and code segment pages which we already knew will be frequently accessed. 
+
+  So we have a special state called "fixed", means that **we'll never swap out these 
+  pages to disk**.
+
+
+### Coremap Initialization
+
+We need to initiate our coremap in `vm_bootstrap`. First, we need to find out
+how many physical pages in system. We can do this using `ram_getsize`. There
+is a big trick here. Since we will only know the physical page number, i.e.
+coremap array length at runtime, so we'd better just define a `struct page`
+pointer and allocate the actually array at runtime after we got the physical
+page number, rather than use a statically defined array with some MACRO like
+`MAX_PHY_PAGE_NUM`. So at first glance, we may write:
+
+```
+paddr_t firstaddr, lastaddr; 
+ram_getsize(&firstaddr, &lastaddr); 
+page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
+pages =(struct page*) kmalloc(page_num * sizeof(struct page)); 
+```
+
+**But the above code will definitly fail**. 
+
+
+Take a look at `ram_getsize`,
+we can see that this function will destroy its `firstaddr` and `lastaddr`
+before return. So after that, if we call `kmalloc`, which call `alloc_kpage`,
+`get_ppages` and `ram_stealmem` to get memory, `ram_stealmem` will fail. The
+contradiction is: **we need to call `ram_getsize` to get physical page number
+so that we can allocate our coremap(`pages`), but once we call `ram_getsize` we
+will not be able allocate any pages!**
+
+To resolve this contradiction, on one hand, we should **initialize all other
+data structures, e.g., locks, before we call `ram_getsize`**. Then we call
+`ram_getsize` to get `firstaddr` and `lastaddr`. After that, instead of using
+`kmalloc`, we must **allocate our coremap manually**, without invoking any
+other malloc routines. A possible solution may be:
+
+```
+ram_getsize(&firstaddr, &lastaddr); 
+page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
+/* pages should be a kernel virtual address !!  */
+pages = (struct page*)PADDR_TO_KVADDR(firstaddr); 
+freeaddr = firstaddr + page_num * sizeof(struct page); 
+```
+
+Now we allocated our core map just between `firstaddr` and `freeaddr`, and
+[`freeaddr`, `lastaddr`] will be system's free memory.
+
+Then we initialize the `pages` array, we need to mark any pages between [0,
+`freeaddr`) as fixed, since this memory contains important kernel code and
+data, or memory mapped I/Os. And we just mark pages between [`freeaddr`,
+`astaddr`] as free.
+
+At the end of `vm_bootstrap`, we may want to **set some flags to indicate that
+vm has already bootstrapped,** since functions like `alloc_kpages` may call
+different routines to get physical page before and after `vm_bootstrap`.

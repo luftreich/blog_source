@@ -1,0 +1,135 @@
+---
+comments: true
+date: 2012-04-28 17:27:39
+layout: post
+title: OS161 Swapping
+categories: [os161]
+tags: [swap, vm]
+---
+
+Now that you can [allocate/free physical pages][physical], and you have [demand paging
+through handling TLB miss][tlb]. Let's get the final part work: swapping.
+
+[physical]: /2012/04/24/os161-physical-page-management
+[tlb]: /2012/04/27/os161-tlb-miss-and-page-fault
+
+<!-- more -->
+
+
+### Three basic operations for a physical page
+
+The first is called **evict**. In a nutshell, `evict` a physical page means we
+modify the page table entry so that this page is not Present (`PTE_P`), but
+Swapped (`PTE_S`). And we also need to shoot down the relative TLB entry. But in
+`evict`, we will not write the page's content to disk. Apparently, **evict can
+only operate on clean pages**.
+
+The second operation is **swapout**. We first write this page's content to
+disk, which makes the page from dirty to clean. And the we just evict it.
+**swapout operation is for dirty pages**.
+
+The last operations is **swapin**. Basically, it's for read some virtual page
+from swap file and place it in some physical page, and also need to modify
+the relevant page table entry, making this page Present (`PTE_P`) instead of
+Swapped(`PTE_S`).
+
+
+### How to store the swapped pages
+
+We have two options here: store the pages in a **disk**, or in a **file**. 
+
+By default, sys161 provide two disks through lamebus, i.e., `lhd0` and `lhd1`. If
+you want to store the pages in the raw disk, you should open the swap space like
+this:
+
+``` c
+struct vnode* swapfile;
+int err = vfs_open("lhd0raw:", O_RDWR, 0, &swapfile);
+if (err != 0) {
+    return err;
+}
+```
+
+Note that the file name must be `lhd0raw:` or `lhd1raw` and the open flag must
+be `O_RDWR`, since the disk is there, and needn't to be created or trunked.
+
+
+On the other hand, if you decided to just store the pages in a normal file, then
+you probably want to create the file like this:
+
+``` c
+struct vnode* swapfile;
+int err = vfs_open("swapfile", O_RDWR|O_CREAT|O_TRUNC, 0, &swapfile);
+if (err != 0) {
+    return err;
+}
+```
+
+The file name is arbitrary, just choose one you like. And we provide the
+`O_TRUNC` flag so that we got a "clean" swap file that contains no contents.
+Then the file will be created under the root directory. 
+
+From my experience, store pages in normal file could be two times faster in
+terms of read/write bandwidth.
+
+For the same reason why we can not open consoles in `thread_create`, you can not 
+do this in `vm_bootstrap` since at that point, VFS system 
+was not initialized yet (see `$OS161_SRC/kern/startup/main.c` for boot sequence, 
+especially line 125~130). But it's OK, we can **open the file until we really 
+need to write pages**, e.g., when we swap out the first page. 
+
+We'll leverage the file operation to manipulate swapped pages. You may want to
+review the file operation system calls to get familiar with VFS operations. We
+use a lot `uio_kinit` and `VOP_READ`/`VOP_WRITE` here. But before all these, we need
+to first create a swap file. 
+
+We also need some data structure to record each page's location in the swap
+file. This data structure should be something like a map. The key is (address
+space, va) pair, and the value is the location of the page. As usual, for
+simplicity, we can just use a statically allocated array. **Each array element
+contains the (address space, va) pair, and this element's index is the page's
+location**. Of course, we need to set up a limit of maximum swapped page number
+if we adopt this silly manner. When swap out a page, we first look up this
+array (by comparing `as` and `va`) and find out if the swap file has already
+contain a copy of this page, if yes then we directly overwrite that page and if
+no, we just find a available slot and write the page to that slot.
+
+A important note is that you want to **create ONE swap file for all process**,
+instead of one swap file for each process. Since by doing the later, you also
+have to allocate a mapping structure for each process and you'll run out of
+memory very quickly (kernel pages are fixed, right?). Now the swap file and the
+mapping data structure is a shared resource among all processes. So you need to
+protect them with a lock.
+
+
+### Two I/O operations on the swap file
+
+These two operations is quite straightforward. The first is called `write_page`,
+which is responsible to **write a page content to a specified location of the
+swap file**. The second is `read_page`, which is to **read a specified page in
+the swap file and copy the content to a physical page**. We do not necessarily
+have to have these to util functions but it's always good to abstract low level
+operations and encapsulate to a convenient interface.
+
+
+### The Swapping Work flow
+
+In your paging algorithm, you certainly will first look for free physical
+pages. But once you fail to find such a page, you have to swap some page out
+to get a free page. That's what the magic function `MAKE_PAGE_AVAIL` do in 
+[my previous post about physical page allocation][physical].
+
+Now let's take a look at the magic function. Denote the page that was to
+swapped out as victim. If it's state is `PAGE_STATE_CLEAN`, it means that this
+page already have a copy in disk and was not ever modified since swapped in. So
+we can safely discard it's content. We use the `evict` operation to deal with it.
+And after that, this page is available.
+
+If this page is dirty, which means either this page do not have a copy in swap
+file or this page was modified since it's swapped in, in both case, we need to
+write its content to swap file. We can use the `swapout` operation here.
+
+In `vm_fault` with fault type `VM_FAULT_READ` or `VM_FAULT_WRITE`, when we find that
+this page is not Present (`PTE_P`), instead of allocate a new page for it, we
+need to further check if this page was swapped (`PTE_S`), if yes then we need to
+swap it in, if no then we can allocate a new physical page for it.
