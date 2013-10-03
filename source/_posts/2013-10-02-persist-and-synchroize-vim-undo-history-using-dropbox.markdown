@@ -12,6 +12,8 @@ It's extremely useful to
  - Have it persisted even after exiting VIM, and 
  - Better, even have it synchronized across all your working machines using Dropbox.
 
+<!-- more -->
+
 Here is the `.vimrc` snippet I used to do the trick.
 
 ```
