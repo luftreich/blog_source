@@ -48,7 +48,7 @@ recent_posts: 5       # Posts in the sidebar Recent Posts section
 excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
 
 titlecase: true       # Converts page and post titles to titlecase
-lsi: true
+lsi: false
 
 # tags
 tag_dir: tag
@@ -60,7 +60,7 @@ default_asides: [custom/asides/tags.html, custom/asides/category_list.html, asid
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
-blog_index_asides: [custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+blog_index_asides: [custom/asides/chuck_norris.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 post_asides: [asides/recent_posts.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 #page_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 
