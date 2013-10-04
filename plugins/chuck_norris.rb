@@ -1,1 +1,1 @@
-/home/jhshi/projects/jekyll_plugins/octopress-chuck-norris/plugins/chuck_norris.rb
+../_plugins/octopress-chuck-norris/plugins/chuck_norris.rb

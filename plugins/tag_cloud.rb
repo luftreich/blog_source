@@ -1,1 +1,1 @@
-/home/jhshi/projects/jekyll_plugins/octopress-tag-cloud/plugins/tag_cloud.rb
+../_plugins/octopress-tag-cloud/plugins/tag_cloud.rb

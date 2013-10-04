@@ -1,1 +1,1 @@
-/home/jhshi/projects/jekyll_plugins/post_revision/revision.rb
+../_plugins/octopress-post-revision/plugins/revision.rb

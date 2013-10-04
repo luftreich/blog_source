@@ -1,1 +1,1 @@
-/home/jhshi/projects/jekyll_plugins/octopress-tag-pages/plugins/tag_generator.rb
+../_plugins/octopress-tag-pages/plugins/tag_generator.rb
