@@ -1,1 +1,0 @@
-../_plugins/octopress-category-list/plugins/category_list.rb

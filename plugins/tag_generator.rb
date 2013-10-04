@@ -1,1 +1,0 @@
-../_plugins/octopress-tag-pages/plugins/tag_generator.rb

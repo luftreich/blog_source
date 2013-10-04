@@ -1,0 +1,15 @@
+[submodule "plugins/octopress-category-list"]
+	path = plugins/octopress-category-list
+	url = https://github.com/alswl/octopress-category-list.git
+[submodule "plugins/octopress-chuck-norris"]
+	path = plugins/octopress-chuck-norris
+	url = https://github.com/alestanis/octopress-chuck-norris.git
+[submodule "plugins/octopress-tag-cloud"]
+	path = plugins/octopress-tag-cloud
+	url = https://github.com/robbyedwards/octopress-tag-cloud
+[submodule "plugins/octopress-tag-pages"]
+	path = plugins/octopress-tag-pages
+	url = https://github.com/robbyedwards/octopress-tag-pages.git
+[submodule "plugins/octopress-post-revision"]
+	path = plugins/octopress-post-revision
+	url = git@github.com:jhshi/octopress-post-revision.git
