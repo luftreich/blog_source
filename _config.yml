@@ -112,3 +112,6 @@ facebook_like: false
 stackoverflow_user_name: jhshi
 stackoverflow_user_id: 963538
 
+# post revision
+github_repo: blog_source
+
