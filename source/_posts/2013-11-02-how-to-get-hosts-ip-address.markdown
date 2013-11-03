@@ -12,7 +12,7 @@ as it sounds, it's actually not a trivial task.
 
 <!-- more -->
 
-### Old-fashioned -- `gethostbyname`
+### Old-fashioned `gethostbyname`
 
 I did some network programing in old days, so I was tempted to use the
 straightforward way using [`gethostbyname`][gethostbyname].
