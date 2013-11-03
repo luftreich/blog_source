@@ -6,11 +6,22 @@ single: true
 <div>
 <article class="hentry" role="article">
   {% include article.html %}
+  <hr />
   <footer>
+    <div>
+      <div style="float: left; width: 45%">
+        {% include post/revision.html %}
+      </div>
+      <div style="float: right; width: 45%">
+        {% include post/related.html %} 
+      </div>
+    </div>
+ 
     <p class="meta">
       {% include post/author.html %}
-      {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
+      {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %} <br />
       {% include post/categories.html %}
+      {% include post/tags.html %}
     </p>
     {% unless page.sharing == false %}
       {% include post/sharing.html %}
