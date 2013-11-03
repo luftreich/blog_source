@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "Home"
+title: "home"
 date: 2013-11-02 23:06
 comments: true
 sharing: true
 footer: true
 ---
 
-Hello World!
+Will come soon!
 
