@@ -4,13 +4,15 @@ title: "How to Get Local Host's Real IP Address"
 date: 2013-11-02 20:20
 comments: true
 categories: ["C"]
-tags: ["ip", "getsockname"]
+tags: ["network", "ip", "getsockname", "gethostbyname", "getifaddrs"]
 ---
 
 I encounter this problem while doing an [network course project][project]. Easy
 as it sounds, it's actually not a trivial task.
 
 <!-- more -->
+
+### Old-fashioned -- `gethostbyname`
 
 I did some network programing in old days, so I was tempted to use the
 straightforward way using [`gethostbyname`][gethostbyname].
@@ -49,6 +51,8 @@ Since `gethostbyname` is actually a DNS looking up process, that DNS request,
 unfortunately, is served by the `/etc/hosts` file, instead of a real decent DNS
 server.
 
+### More Advanced `getifaddrs`
+
 I searched the web and found [this stackoverflow threads][stackoverflow] talking 
 about using [`getifaddrs`][getifaddrs] to get NIC's IP address. I tried and it seems to work.
 Since the machine I worked on uses "eth0" as external NIC, so when looping the
@@ -57,6 +61,8 @@ result, I just match the results that has the name "eth0".
 Although it works well, the solution is a little bit ad-hoc. Since the network
 interface's name is not necessarily "eth0", for example, in some laptop or
 netbook, the primary interface may be "wlan0" instead of "eth0".
+
+### Most Elegant Way
 
 Finally, I adopted the solution that mentioned later on that thread. Basically,
 I connected to a well-known server (e.g., Google's DNS server) and then get my 
