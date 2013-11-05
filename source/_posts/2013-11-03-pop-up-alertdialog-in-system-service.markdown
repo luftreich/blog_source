@@ -40,7 +40,7 @@ Here is how I solved this problem.
 // builder set up code here
 // ...
 
-AlertDialog dialog = builder.build();
+AlertDialog dialog = builder.create();
 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 dialog.show();
 ```
