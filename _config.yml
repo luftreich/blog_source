@@ -59,9 +59,9 @@ default_asides: [custom/asides/tag_cloud.html, custom/asides/category_cloud.html
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
-blog_index_asides: [custom/asides/pageview.html, custom/asides/chuck_norris.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, custom/asides/qrcode.html]
-post_asides: [custom/asides/pageview.html, asides/recent_posts.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, custom/asides/qrcode.html]
-page_asides: [asides/github.html]
+blog_index_asides: [custom/asides/chuck_norris.html, custom/asides/pageview.html, custom/asides/popular_posts.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, custom/asides/qrcode.html]
+post_asides: [custom/asides/chuck_norris.html, custom/asides/pageview.html, custom/asides/popular_posts.html, asides/recent_posts.html, custom/asides/tag_cloud.html, custom/asides/category_cloud.html, asides/github.html, custom/asides/stackoverflow.html, custom/asides/qrcode.html]
+page_asides: [asides/github.html, custom/asides/stackoverflow.html]
 
 
 
