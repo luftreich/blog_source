@@ -16,6 +16,8 @@ group :development do
   gem 'liquid', '~> 2.3.0'
   gem 'directory_watcher', '1.4.1'
   gem 'gsl', '1.14.7'
+  gem 'google-api-client'
+  gem 'chronic'
 end
 
 gem 'sinatra', '~> 1.4.2'
