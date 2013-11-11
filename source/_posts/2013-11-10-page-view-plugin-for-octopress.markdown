@@ -23,7 +23,7 @@ the part that fetch data from Google Analytics.
 I haven't done any decent ruby coding before, so bear with me if I wrote some
 silly ruby code. But it works.
 
-## How to use
+## How To Use
 
 ### Get the plugin
  - Install required gems
@@ -84,7 +84,7 @@ page-view:
   filters:                  # optional
 ```
 
-## How it works
+## How It Works
 
 This plugin provides an Jekyll [Generator][generator], called `GoogleAnalytics`,
 to fetech data from Google, and a Jekyll [Liquid Tag][tag] to actually generate

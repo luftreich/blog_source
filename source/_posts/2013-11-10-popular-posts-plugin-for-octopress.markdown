@@ -14,7 +14,7 @@ of the post as metric.
 
 <!-- more -->
 
-## How to Use
+## How To Use
 
 In [another post][post], I described how to use the [octopress-page-view][pv] plugin to
 show the PV of each post and the whole site. This plugin depend on that to
@@ -57,7 +57,7 @@ This plugin doesn't need any special configurations, as long as you set
 There is one parameters you can tune, though. You can set how many popular posts
 will be shown in `popular_posts.html`
 
-## How it Works
+## How It Works
 
 `octopress-page-view` has done all the hard job for us. All we need to do is
 just sort the posts by their page view count.
