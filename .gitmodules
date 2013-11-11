@@ -1,6 +1,3 @@
-[submodule "plugins/octopress-post-revision"]
-	path = plugins/octopress-post-revision
-	url = git@github.com:jhshi/octopress-post-revision.git
 [submodule "plugins/octopress-category-list"]
 	path = plugins/octopress-category-list
 	url = https://github.com/alswl/octopress-category-list.git
