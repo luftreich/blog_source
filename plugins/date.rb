@@ -69,8 +69,6 @@ module Jekyll
         "previous"          => self.previous,
         "tags"              => self.tags,
         "content"           => self.content,
-        "file_name"         => @name,
-        "full_path"         => File.join(@base,@name),
       })
     end
   end
