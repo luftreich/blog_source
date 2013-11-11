@@ -32,7 +32,7 @@ silly ruby code. But it works.
 sudo gem install chronic google-api-client
 ```
 
- - Clone or download the repository
+ - Clone the repository
 
 ```bash
 cd /tmp
