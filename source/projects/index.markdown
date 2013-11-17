@@ -66,6 +66,10 @@ plugins that make my blogging easier.
    [this blog][pp_blog]
 
 
+<hr/>
+{% include post/revision.html %}
+
+
 [phonelab]: http://www.phone-lab.org
 [gn]: http://en.wikipedia.org/wiki/Galaxy_Nexus
 [conductor]: https://play.google.com/store/apps/details?id=edu.buffalo.cse.phonelab.harness.developer
