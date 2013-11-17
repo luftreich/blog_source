@@ -38,7 +38,7 @@ information, which is exactly what we want.
 
 We need three piece of information:
 
- - *Post file's full/absolute path*
+ - Post file's full/absolute path
  - Post file name
  - Post file's dir name
 
@@ -125,7 +125,6 @@ URL.
 link = File.join('https://github.com', site['github_user'], site['github_repo'],
                  'commits', branch, site['source'], post['dir_name'], post['file_name'])
 ```
-
 
 
 [jekyll]: http://jekyllrb.com/
