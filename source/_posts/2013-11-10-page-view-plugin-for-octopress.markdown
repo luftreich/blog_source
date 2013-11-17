@@ -4,7 +4,7 @@ title: "Page View Plugin for Octopress"
 date: 2013-11-10 18:21
 comments: true
 categories: ["octopress"]
-tags: ["page view", "plugin", "Google Analytics", "jekyll", "octopress"]
+tags: ["plugin", "jekyll", "octopress", "ruby"]
 ---
 
 It's always nice to display some blog stats, such as page view count, to give

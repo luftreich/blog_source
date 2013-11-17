@@ -4,7 +4,7 @@ title: "Popular Posts Plugin for Octopress"
 date: 2013-11-10 20:08
 comments: true
 categories: ["octopress"]
-tags: ["popular posts", "jekyll", "plugin"]
+tags: ["popular posts", "jekyll", "plugin", "ruby"]
 ---
 
 This post describes the [octopress-popular-posts][pp] for Octopress. Although
