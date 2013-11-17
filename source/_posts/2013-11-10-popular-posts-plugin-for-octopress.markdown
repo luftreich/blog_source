@@ -96,4 +96,4 @@ so I merge the `popular_posts` data to `site.config`.
 [pp]: https://github.com/jhshi/octopress-popular-posts
 [pp2]: https://github.com/octopress-themes/popular-posts
 [pv]: https://github.com/jhshi/octopress-page-view
-[post]: http://jhshi.me/2013/11/10/page-view-plugin-for-octopress/
+[post]: /2013/11/10/page-view-plugin-for-octopress/
