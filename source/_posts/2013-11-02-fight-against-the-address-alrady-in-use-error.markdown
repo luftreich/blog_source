@@ -4,7 +4,7 @@ title: "Fight Against the 'Address alrady in use' Error"
 date: 2013-11-02 22:36
 comments: true
 categories: ["C"]
-tags: ["bind", "SO_REUSEADDR", "socket"]
+tags: ["bind", "SO_REUSEADDR", "socket", "network"]
 ---
 
 You have probably seen this error quite often. The detailed reason why this
