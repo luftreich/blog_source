@@ -43,13 +43,13 @@ plugins that make my blogging easier.
  - [octopress-popular-post][pp]
 
 
-[phonelab]: www.phone-lab.org
+[phonelab]: http://www.phone-lab.org
 [gn]: http://en.wikipedia.org/wiki/Galaxy_Nexus
 [conductor]: https://play.google.com/store/apps/details?id=edu.buffalo.cse.phonelab.harness.developer
 [wiki]: http://en.wikipedia.org/wiki/List_of_WLAN_channels
 [network]: http://www.cse.buffalo.edu/~qiao/cse489
-[os]: www.ops-class.org
-[octoress]: octopress.org
+[os]: http://www.ops-class.org
+[octoress]: http://www.octopress.org
 [revision]: https://github.com/jhshi/octopress-post-revision
 [pv]: https://github.com/jhshi/octopress-page-view
 [pp]: https://github.com/jhshi/octopress-popular-posts
