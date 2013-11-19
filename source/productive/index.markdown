@@ -50,8 +50,8 @@ the mechanical ones. They just makes you loving typing!
 [How to Choose the Best Mechanical Keyboard (and Why You'd Want To)][link]
 
 I'm currently using [Ducky 1008][ducky] at home and 
-[CoolerMaster QuickFire Rapid][quickfire] at office. Both of them have brown keys, 
-yet feels slightly different.
+[CoolerMaster QuickFire Rapid][quickfire] at office. Both of them have brown
+switches, yet feels slightly different.
 
 I used to have a [Razer Black Widow 2013][razer] for two month, before it heated
 up and died. That will be the last Razer product I'll ever have.
