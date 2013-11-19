@@ -6,6 +6,8 @@ sharing: false
 footer: false
 ---
 
+{% img left /images/portrait.jpg Portrait %}
+
 This is Jinghao Shi. I am currently a first year Ph.D. student in [Department of Computer
 Science and Engineering][cse], [University at Buffalo][ub].
 
