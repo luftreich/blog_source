@@ -11,11 +11,17 @@ Or as I would say to my friends: "They are life-changing!"
 ### [Vim][vim]
 
 I don't know about Emacs, but other than that, Vim is THE only editor you should
-use! Here is my [.vimrc][vimrc].
+use (if you ever write any code)! Here is my [.vimrc][vimrc].
 
 ### [Vimium][vimium]
 
-Browse the web in a Vim way. A must-have for Vim addicts, like me, LOL~
+Browse the web in a Vim way. A must-have for Vim addicts, like me, LOL.
+
+### Bash VI mode
+
+Want use `j`,`k`,`h`, `l` to navigate in bash? Want `Esc` then `dd`? You want the
+`vi` mode of bash. Check [this article][bash-vi] on how to set it. Again, a
+must-have for vim addicts.
 
 ### [Tmux][tmux]
 
@@ -42,6 +48,14 @@ Life is short
 (You need Python)
 {% endblockquote %}
 
+### [Git][git]
+
+Before Git, the only CMS system I ever used is SVN, which was awful, and
+it requires you to set up and SVN server to work. Thus I didn't use
+
+Now with Git, everything feels so easy and painless. And I use it to manage
+virtually all my projects (even this blog!)
+
 ### Mechanical Keyboard
 
 Trust me, you'll never want to use any membrane keyboards once you used to
@@ -53,8 +67,8 @@ I'm currently using [Ducky 1008][ducky] at home and
 [CoolerMaster QuickFire Rapid][quickfire] at office. Both of them have brown
 switches, yet feels slightly different.
 
-I used to have a [Razer Black Widow 2013][razer] for two month, before it heated
-up and died. That will be the last Razer product I'll ever have.
+I had a [Razer Black Widow 2013][razer] for two month, before it heated
+up and died. That will probably be _the last_ Razer product I'll ever have.
 
 <hr/>
 {% include post/revision.html %}
@@ -73,3 +87,5 @@ up and died. That will be the last Razer product I'll ever have.
 [ducky]: http://www.duckychannel.com.tw/en/DK1008.html
 [quickfire]: http://www.cmstorm.com/en/products/keyboards/quickfirerapid/
 [razer]: http://www.razerzone.com/minisite/blackwidow/the_razer_blackwidow
+[git]: http://git-scm.com
+[bash-vi]: http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/
