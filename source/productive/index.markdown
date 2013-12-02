@@ -45,7 +45,7 @@ always finish my homework and project reports early.
 
 {% blockquote Bruce Eckel %}
 Life is short
-(You need Python)
+(You need Python).
 {% endblockquote %}
 
 ### [Git][git]
