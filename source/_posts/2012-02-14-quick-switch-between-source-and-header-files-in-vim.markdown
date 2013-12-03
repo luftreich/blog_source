@@ -33,4 +33,11 @@ familiar `ctrl+t ` to jump back, very intuitive. Plus, I found a [` gf ` command
 that can jump to the file under cursor, but with the same drawbacks as `a.vim`, 
 thus not adorable.
 
+### UPDATE
+
+Here is a [Vim Wiki][wiki] talking about how to jump back and forth using 
+{%key Ctrl %}-I and {%key Ctrl %}-O, which is kind of sweet. Thanks
+@Partha Bera for point that out.
+
 [gf]: http://vim.wikia.com/wiki/Open_file_under_cursor
+[wiki]: http://vim.wikia.com/wiki/Jumping_to_previously_visited_locations
