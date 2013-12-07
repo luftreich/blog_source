@@ -24,8 +24,8 @@ responsible for:
 
 #### Smart Phone Assisted Wifi AP Configuration
 
-IEEE 802.11 WLAN, commonly known as WiFi, only has [three non-overlapping
-channels at 2.4GHz band][wiki]. This causes severe channel collision and
+IEEE 802.11 WLAN, commonly known as WiFi, only has 
+[three non-overlapping channels at 2.4GHz band][wiki]. This causes severe channel collision and
 interference problems, especially in environment with dense Access Point (AP)
 deployment.
 

@@ -8,17 +8,19 @@ footer: false
 
 {% img left /images/portrait.jpg Portrait %}
 
-This is Jinghao Shi. I am currently a first year Ph.D. student in [Department of Computer
-Science and Engineering][cse], [University at Buffalo][ub].
+This is Jinghao Shi. I am currently a first year Ph.D. student in 
+[Department of Computer Science and Engineering][cse], [University at Buffalo][ub].
 
-I received my B.S. degree in 2011 on Computer Science at [University of Science and
-Technology of China][ustc]. Then I came to [University of Hong Kong][hku]. I
-spent one year and a half there, before I dropped my program and came to
-Buffalo, due to personal reasons.
+I received my B.S. degree in 2011 on Computer Science at 
+[University of Science and Technology of China][ustc]. Then I came to 
+[University of Hong Kong][hku]. I spent one year and a half there, before I 
+dropped my program and came to Buffalo, due to personal reasons.
 
-This site is generated using [Octopress][octopress], and hosted in [Github
-Pages][github]. You can find more about [my projects][projects] and
+This site is generated using [Octopress][octopress], and hosted in 
+[Github Pages][github]. You can find more about [my projects][projects] and
 [blogs][blog].
+
+###Teaching
 
 
 
