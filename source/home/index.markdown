@@ -20,10 +20,6 @@ This site is generated using [Octopress][octopress], and hosted in
 [Github Pages][github]. You can find more about [my projects][projects] and
 [blogs][blog].
 
-###Teaching
-
-
-
 <hr/>
 {% include post/revision.html %}
 
