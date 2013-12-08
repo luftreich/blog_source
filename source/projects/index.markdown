@@ -43,7 +43,7 @@ projects. You can found [several blogs][network_blog] on this project.
  - [Distance Vector Algorithm in Network Layer][dvr]
  - NS2 Simulation of Random MAC Protocol
 
-#### [CSE521 Operating System][os]
+#### [CSE521 Operating System (OS161)][os]
 
 This is probably what this blog is most famous for. I didn't actually take this
 course, I just found the projects very interesting. Plus, the instructor offers
@@ -75,7 +75,7 @@ plugins that make my blogging easier.
 [wiki]: http://en.wikipedia.org/wiki/List_of_WLAN_channels
 [network]: http://www.cse.buffalo.edu/~qiao/cse489
 [os]: http://www.ops-class.org
-[octoress]: http://www.octopress.org
+[octopress]: http://www.octopress.org
 [revision]: https://github.com/jhshi/octopress-post-revision
 [pv]: https://github.com/jhshi/octopress-page-view
 [pp]: https://github.com/jhshi/octopress-popular-posts
