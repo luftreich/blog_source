@@ -40,12 +40,12 @@ This is an core course of CSE graduate program, with several challenging
 projects. You can found [several blogs][network_blog] on this project.
 
  - [P2P File Sharing System][p2p]
- - Distance Vector Algorithm in Network Layer
- - NS2 Simulation
+ - [Distance Vector Algorithm in Network Layer][dvr]
+ - NS2 Simulation of Random MAC Protocol
 
 #### [CSE521 Operating System][os]
 
-This is probably what this blog is famous for. I didn't actually take this
+This is probably what this blog is most famous for. I didn't actually take this
 course, I just found the projects very interesting. Plus, the instructor offers
 online automatic grading system, which is so cool.
 
@@ -57,7 +57,7 @@ This is blog is powered by [Octopress][octopress]. I wrote a few Octopress
 plugins that make my blogging easier.
 
  - [octopress-post-revision][revision]
-   Show blog revision history.
+   Show blog revision history. See [this blog][revision_blog]
  - [octopress-page-view][pv]
    Display page view count from Google Analytics. See [this blog][pv_blog]
  - [octopress-popular-post][pp]
@@ -84,3 +84,5 @@ plugins that make my blogging easier.
 [os161_blog]: /category/os161/
 [pv_blog]: /2013/11/10/page-view-plugin-for-octopress/
 [pp_blog]: /2013/11/10/popular-posts-plugin-for-octopress/
+[dvr]: https://github.com/jhshi/course.network.dvr
+[revision_blog]: /2013/11/17/post-revision-plugin-for-octopress/
