@@ -51,6 +51,11 @@ online automatic grading system, which is so cool.
 
 You can found [a bunch of blogs][os161_blog] on this project.
 
+#### CSE596 Introduction to the Theory of Computation
+
+I composed an collection of glossaries, theorems, corollaries, etc., at 
+[this git repo][cs_theory].
+
 ## Other
 #### Octopress Plugins
 This is blog is powered by [Octopress][octopress]. I wrote a few Octopress
@@ -86,3 +91,4 @@ plugins that make my blogging easier.
 [pp_blog]: /2013/11/10/popular-posts-plugin-for-octopress/
 [dvr]: https://github.com/jhshi/course.network.dvr
 [revision_blog]: /2013/11/17/post-revision-plugin-for-octopress/
+[cs_theory]: https://github.com/jhshi/course.cs_theory
