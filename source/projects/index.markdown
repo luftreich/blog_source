@@ -42,6 +42,7 @@ projects. You can found [several blogs][network_blog] on this project.
  - [P2P File Sharing System][p2p]
  - [Distance Vector Algorithm in Network Layer][dvr]
  - NS2 Simulation of Random MAC Protocol
+ - [Notes][notes]
 
 #### [CSE521 Operating System (OS161)][os]
 
@@ -92,3 +93,4 @@ plugins that make my blogging easier.
 [dvr]: https://github.com/jhshi/course.network.dvr
 [revision_blog]: /2013/11/17/post-revision-plugin-for-octopress/
 [cs_theory]: https://github.com/jhshi/course.cs_theory
+[notes]: https://github.com/jhshi/course.network.note
