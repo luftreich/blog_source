@@ -8,7 +8,9 @@ footer: false
 
 {% img left /images/portrait.jpg Portrait %}
 
-This is Jinghao Shi. I am currently a first year Ph.D. student in 
+This is Jinghao Shi [^1] (<img src="/images/name.png" width="60" height="20" 
+alt="Chinese Name" style="vertical-align:middle; border:0px !important;" />). 
+I am currently a first year Ph.D. student in 
 [Department of Computer Science and Engineering][cse], [University at Buffalo][ub].
 
 I received my B.S. degree in 2011 on Computer Science at 
@@ -31,3 +33,5 @@ This site is generated using [Octopress][octopress], and hosted in
 [github]: http://pages.github.com/
 [projects]: /projects
 [blog]: /
+[^1]:  How to Pronounce? "Jing" is like "Jin" (_note: without "g"_) in "Jingle-bell", and "hao" is like "ho" in "hot".
+
