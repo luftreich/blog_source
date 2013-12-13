@@ -113,8 +113,8 @@ So now we get the downloaded file's URI, we can than either copy it to somewhere
 else, or go ahead and process it.
 
 There are more information to query when the download failed, e.g., reason, how
-much as been downloaded, etc. Please refer to the [documentation of
-DownloadManager][dm] for complete list of column names.
+much as been downloaded, etc. Please refer to the 
+[documentation of DownloadManager][dm] for complete list of column names.
 
 [doc]: http://developer.android.com/reference/android/app/DownloadManager.Request.html
 [dm]: http://developer.android.com/reference/android/app/DownloadManager.html
