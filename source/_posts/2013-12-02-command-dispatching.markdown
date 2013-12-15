@@ -3,8 +3,8 @@ layout: post
 title: "Command Dispatching"
 date: 2013-12-02 12:52
 comments: true
-categories: ["C"]
-tags: ["network", "dispatch", "readline"]
+categories: ["network"]
+tags: ["C", "dispatch", "readline"]
 ---
 
 In a few network projects, we're asked to write an interactive shell, to receive

@@ -3,8 +3,8 @@ layout: post
 title: "Use Select to Monitor Multiple File Descriptors"
 date: 2013-11-02 21:44
 comments: true
-categories:  ["C"]
-tags: ["select", "network", "fd_set"]
+categories:  ["network"]
+tags: ["select", "fd_set"]
 ---
 
 In the [P2P network project][project], we were asked to simultaneously monitor user input

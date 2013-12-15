@@ -3,8 +3,8 @@ layout: post
 title: "How to Get Local Host's Real IP Address"
 date: 2013-11-02 20:20
 comments: true
-categories: ["C"]
-tags: ["network", "ip", "getsockname", "gethostbyname", "getifaddrs"]
+categories: ["network"]
+tags: ["ip", "getsockname", "gethostbyname", "getifaddrs"]
 ---
 
 I encounter this problem while doing an [network course project][project]. Easy
