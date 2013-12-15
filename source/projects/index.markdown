@@ -86,7 +86,7 @@ plugins that make my blogging easier.
 [pv]: https://github.com/jhshi/octopress-page-view
 [pp]: https://github.com/jhshi/octopress-popular-posts
 [p2p]: https://github.com/jhshi/course.network.p2p
-[network_blog]: /tag/network/
+[network_blog]: /category/network/
 [os161_blog]: /category/os161/
 [pv_blog]: /2013/11/10/page-view-plugin-for-octopress/
 [pp_blog]: /2013/11/10/popular-posts-plugin-for-octopress/
