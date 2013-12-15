@@ -4,7 +4,7 @@ title: "Simulate Random MAC Protocol in NS2 (Part I)"
 date: 2013-12-13 12:54
 comments: true
 categories: ["network"]
-tags: ["tcl", "ns2", "network"]
+tags: ["tcl", "ns2"]
 ---
 
 In this network project, we would need to:
