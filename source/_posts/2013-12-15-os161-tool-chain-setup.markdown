@@ -190,14 +190,64 @@ better, we tell bash to add it to system path automatically. Add this line to yo
 ```bash
 export PATH=$PATH:~/projects/courses/os161/tools/bin
 ```
+Then close and open your terminal, do `echo $PATH`, you should see
+`...os161/tools/bin` at the end.
+
+### Configure OS161
+
+You may want to clone the os161 repo and configure it. Suppose you've registered
+an account on [ops-class.org][ops] and uploaded your public key. Then you can
+clone the source tree and configure as follows.
+
+```bash
+cd ~/projects/courses/os161
+mkdir root
+git clone ssh://src@src.ops-class.org/src/os161 src
+cd src
+./configure --ostree=~/projects/courses/os161/root
+bmake
+bmake install
+cd ..
+cp tools/share/examples/sys161/sys161.conf.sample root/sys161.conf
+```
+
+Note that:
+
+ - We create an `root` directory under `os161`, this will be where the
+   compiled user space binaries, and also the compiled kernel image will go.
+ - When configure the os, we specify the `--ostree` argument, so that the
+   binaries will be copied to the `root` directory we just created. The default
+   location is `~/root`, which is probably not what you want.
+ - We copy the sys161 configuration example to the `root` directory. This
+   configuration file is needed by sys161.
+
+Now go to `~/projects/courses/os161/root`, you should see something there, e.g.,
+`bin`, `hostbin`, `lib`, `man`, etc.
+
+### Compile and Run the Kernel
+
+```bash
+cd ~/projects/courses/os161/src/kern/conf
+./config ASST0
+cd ../compile/ASST0
+bmake depend
+bmake && bmake install
+```
+
+Now let's fire up the kernel.
+```bash
+cd ~/projects/courses/os161/root
+sys161 kernel
+```
 
 ### Resources
 
-You can find more instructions on tool chain setup in these pages.
+You can find more instructions on tool chain setup and os161 configuration in these pages.
 
  - [Installing OS/161 On Your Own Machine][waterloo]
  - [OS/161 Toolchain Setup][harvard]
  - [Building System/161 and the OS/161 Toolchain][hmc]
+ - [ASST0: Introduction to OS/161][ops-asst0]
 
 
 [dl]: http://www.eecs.harvard.edu/~dholland/os161/download/
@@ -211,3 +261,5 @@ You can find more instructions on tool chain setup in these pages.
 [waterloo]: https://www.student.cs.uwaterloo.ca/~cs350/common/Install161NonCS.html
 [harvard]: http://www.eecs.harvard.edu/~dholland/os161/resources/setup.html
 [hmc]: http://www.cs.hmc.edu/~geoff/classes/hmc.cs134.201209/buildos161.html
+[ops]: http://www.ops-class.org
+[ops-asst0]: http://www.ops-class.org/asst/0
