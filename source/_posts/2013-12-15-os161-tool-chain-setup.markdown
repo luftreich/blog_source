@@ -159,7 +159,7 @@ avoid rebuilding doc files here.
 Sys161 is the simulator that our os161 will be running on.
 
 ```bash
-cd sys161-1.99.0
+cd sys161-1.99.06
 ./configure --prefix=$PREFIX mipseb
 make
 make install
