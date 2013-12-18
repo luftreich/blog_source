@@ -10,7 +10,7 @@ tags: [addrspace, vm, page table]
 Now we've set up our coremap and also have the routines to allocate and free
 physical pages. It's the time to set up user's virtual address space.
 
-Basically, we'll adopt **two-level page table**. If you're not
+Basically, we'll adopt _two-level page table_. If you're not
 already familiar with this, you can check out the [page table wiki][page_table] 
 and [this document talking about MIPS and X86 paging][paging].
 
@@ -19,8 +19,8 @@ and [this document talking about MIPS and X86 paging][paging].
 
 The page table entry format will be much alike those in X86. For a page
 directory entry, the upper 20 bits indicates the base physical address of the
-page table, and **we use one bit in the lower 12 bits to indicate whether this
-page table exist or not**. For a page table entry, the upper 20 bits stores
+page table, and _we use one bit in the lower 12 bits to indicate whether this
+page table exist or not_. For a page table entry, the upper 20 bits stores
 the base physical address of the actual page, while the lower 12 bits contain
 some attribute of this page, e.g., readable, writable, executable, etc. You are
 free to define all these (format of page directory and page table entry)
@@ -34,7 +34,7 @@ programming.
 
 ### What to store in the `addrspace` structure?
 
-**An address space is actually just a page directory**: we can use this
+_An address space is actually just a page directory_: we can use this
 directory and page table to translate all the addresses inside the address
 space. And we also need to keep some other information like user heap start,
 user heap end, etc. But that's all, and no more.
@@ -51,7 +51,7 @@ valid or not.
 
 ### Address Translating with `pgdir_walk`
 
-**This is another most important and core function in this lab.** Basically,
+_This is another most important and core function in this lab._ Basically,
 given an address space and virtual address, we want to find the corresponding
 physical address. This is what `pgdir_walk` does. We first extract the page
 directory index (top 10 bits) from the `va` and use it to index the page
@@ -61,12 +61,12 @@ page directory, thus we get the base physical address of the actual page.
 
 Several points to note:
 
-- Instead of return the physical address, **you may want to return the page
-table entry pointer** instead. Since in most cases, we use `pgdir_walk` to get
+- Instead of return the physical address, _you may want to return the page
+table entry pointer_ instead. Since in most cases, we use `pgdir_walk` to get
 page table entries and modify it
 
 - We'll also need to pass `pgdir_walk` a flag, indicating that whether we want
-to create a page table if non-exist (remember the **present bit** of page
+to create a page table if non-exist (remember the _present bit_ of page
 directory entry?). Since sometimes, we want to make sure that a `va` is mapped to
 a physical page when calling `pgdir_walk`. But most of the time, we just want to
 query if a `va` is mapped.
@@ -80,8 +80,8 @@ address base. You'll need a lot `PADDR_TO_KVADDR` here.
 
 This part is easy if you decide not support Copy-On-Write pages. Basically, you
 just `pgdir_walk` old address space's page table, and copy all the present pages.
-Only one point, don't forget to **copy all the attribute bits (low 12 bits) of
-the old page table entry**.
+Only one point, don't forget to _copy all the attribute bits (low 12 bits) of
+the old page table entry_.
 
 You'll get some extra work when you enable swapping: you need to copy all the
 swapped pages beside present pages as well.
@@ -94,15 +94,15 @@ pages. Also same with `as_copy`, you need to free the swapped pages latter
 
 ### Define regions using `as_define_region`
 
-Since we'll do **on-demand paging**, so we won't allocate any pages in
+Since we'll do _on-demand paging_, so we won't allocate any pages in
 `as_define_region` Instead, we just walk through the
 page table, and set the attribute bits accordingly. One point, remember the
-`heap_start` and `heap_end` field in `struct addrspace`? Question: **where should
-user heap start? Immediately after user bss segment!** And how would we know the
+`heap_start` and `heap_end` field in `struct addrspace`? Question: _where should
+user heap start? Immediately after user bss segment!_ And how would we know the
 end of user bss segment? In `as_define_region`! So each time in `as_define_region`,
 we just compare addrspace's current hew` and the region end, and set
-the `heap_start` right after (`vaddr+sz`). Don't forget to **proper align the
-`heap_start`(by page bound)**, of course.
+the `heap_start` right after (`vaddr+sz`). Don't forget to _proper align the
+`heap_start`(by page bound)_, of course.
 
 This should also be the place we record each region information (e.g., base,
 size, permission, etc) so that we can check them in `vm_fault`.

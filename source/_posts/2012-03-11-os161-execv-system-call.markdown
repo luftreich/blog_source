@@ -10,12 +10,9 @@ tags:  [execv, syscall]
 Basically, `execv` do more or less the same thing with `runprogram` resided in
 `$OS161_SRC/kern/syscall/runprogram.c`. The overall flow of `sys_execv` are:
 
-  1. **Copy arguments into kernel buffer**
-
+  1. _Copy arguments into kernel buffer_
   2. Open the executable, create a new address space and load the elf into it
-
-  3. **Copy the arguments into user stack**
-
+  3. _Copy the arguments into user stack_
   4. Return user mode using `enter_new_process`
 
 <!-- more -->
@@ -37,19 +34,18 @@ the pointers one by one using `copyin` until we encounter a `NULL`.
 
 In whichever way to do this, one of step 1 and 3 must be complicated. I choose
 to carefully pack the arguments into a kernel buffer and then just directly
-copy this buffer into user stack in bulk. Note that in MIPS, **pointers must be 
-aligned by 4**. So don't forget to padding when necessary
+copy this buffer into user stack in bulk. Note that in MIPS, _pointers must be 
+aligned by 4_. So don't forget to padding when necessary
 
 For convenience, assume that arguments are {`foo`, `os161`, `execv`, `NULL`}.
 Then after packing, my kernel buffer looks like this:
 
-{% img center /images/2012-03-11-kargv.png  Arguments in `kargv` %} 
+{% img center /images/2012-03-11-kargv.png %}
 
-**Typo: **`kargv[2]` should be 28, not 26.
+__Typo__: `kargv[2]` should be 28, instead of 26.
 
-Note that `kargv[i]` stores the offset of the `i`'th arguments **within the kargv
-array**, since up to now we don't know their real user address yet (although we
-can actually calculate that out...).
+Note that `kargv[i]` stores the _offset_ of the i'th arguments within the
+`kargv` array, since up to now we don't know their real user address yet.
 
 
 ### Copy the arguments into user stack
@@ -58,11 +54,11 @@ Why user stack, not anywhere else? Because it's the only space we know for
 sure. We can use `as_define_stack` to get the value of initial stack pointer
 (normally `0x8000000`, aka `USER_SPACE_TOP`). So what we do is 
 
-1. Fill `kargv[i]` with actual user space pointer, and 
-2. Copy `kargv` array into the stack 
-3. Minus `stackptr` by the length of `kargv` array. 
+ 1. Fill `kargv[i]` with actual user space pointer, and 
+ 2. Copy `kargv` array into the stack 
+ 3. Minus `stackptr` by the length of `kargv` array. 
 
-Note that **we must modify `kargs[i]` before we do the actual copy**, 
+Note that _we must modify `kargs[i]` before we do the actual copy_, 
 otherwise some weird bus error or TLB miss will occur.
 
 The steps are shown as follows (here we assume `stackptr` initial value is
