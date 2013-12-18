@@ -59,7 +59,17 @@ export PATH=$PATH:$PREFIX/bin
 ```
 
 Of course you can install os161 tool chain anywhere you like, just make sure the
-directory structure is right.
+directory structure is right. Note that:
+
+ - In the whole process of doing this, you don't need to touch any file outside
+   our `os161` directory. So if you must use `sudo` to copy some stuff, then you
+   probably typed something wrong.
+ - The environment variables (e.g., `PREFIX`, `BUILD`) are only valid in current
+   session, so in case you want to take a break(e.g., play guitar) during the
+   process, make sure you still have those variables. You can do that by do
+   `echo $PREFIX`, make sure it's `~/projects/courses/os161/tools`.
+ - If you choose to install the tool chain somewhere else, you need to adjust
+   the variables accordingly.
 
 ### Download And Extract the Packages
 
@@ -102,7 +112,10 @@ make install
 cd ..
 ```
 
-Note how we set the `--prefix` when do configuration. Also, we fool the `make`
+Note how we set the `--prefix` when do configuration. That option is to tell the
+Makefile where the generated binary or library files should go.
+
+Also, we fool the `make`
 system by touching all the `texinfo` files to make the `make` think those files
 doesn't need to be rebuilt. Because:
 
@@ -111,11 +124,15 @@ doesn't need to be rebuilt. Because:
    yell out some annoying errors on those doc files.
  - And we don't really care the docs...
 
+After this step, you should have some `mips-harvard-os161-*` binary files in the
+`tools/bin` directory.
+
 ### GCC
 
 ```bash
 cd gcc-4.1.2+os161-2.0
-./configure --nfp --disable-shared --disable-threads --disable-libmudflap --disable-libssp --target=mips-harvard-os161 --prefix=$PREFIX
+./configure --nfp --disable-shared --disable-threads --disable-libmudflap\
+        --disable-libssp --target=mips-harvard-os161 --prefix=$PREFIX
 make -j 8
 make install
 cd ..
