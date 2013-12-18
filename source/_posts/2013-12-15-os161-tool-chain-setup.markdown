@@ -232,7 +232,7 @@ cd ~/projects/courses/os161
 mkdir root
 git clone ssh://src@src.ops-class.org/src/os161 src
 cd src
-./configure --ostree=~/projects/courses/os161/root
+./configure --ostree=$HOME/projects/courses/os161/root
 bmake
 bmake install
 cd ..
