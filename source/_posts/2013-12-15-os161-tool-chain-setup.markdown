@@ -154,6 +154,17 @@ cd ..
 Note that we need to `--disable-werror` when configure. Same as `binutils`, we
 avoid rebuilding doc files here.
 
+If you see this error when do configure.
+```
+configure: error: no termcap library found
+```
+
+You probably need to install the `libncurses5-dev` package.
+
+```bash
+sudo apt-get install libncurses5-dev
+```
+
 ### SYS161
 
 Sys161 is the simulator that our os161 will be running on.
