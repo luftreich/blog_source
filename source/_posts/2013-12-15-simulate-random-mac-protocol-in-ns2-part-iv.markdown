@@ -93,7 +93,14 @@ in my case (packet size is 16 bytes).
 
 {% img /images/prob.png %}
 
+Note that somehow this is not the ideal probability distribution. Please refer
+to this paper for theoretical analysis and also simulation results.
+
+[QoMOR: A QoS-aware MAC protocol using Optimal Retransmission for Wireless
+Intra-Vehicular Sensor Networks][paper]
+
 [wiki]: http://nsnam.isi.edu/nsnam/index.php/NS-2_Trace_Formats
 [p1]: /2013/12/13/simulate-random-mac-protocol-in-ns2-part-i/
 [p2]: /2013/12/15/simulate-random-mac-protocol-in-ns2-part-ii/
 [p3]: /2013/12/15/simulate-random-mac-protocol-in-ns2-part-iii/
+[paper]: http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=4300816&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D4300816
