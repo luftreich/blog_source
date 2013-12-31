@@ -28,10 +28,11 @@ thread name (`curthread->t_name`) as the thread's identifier. Nevertheless, same
 with the case in real world, the thread's name isn't necessarily unique. The 
 OS161 doesn't forbidden us to create a bunch of threads with the same name.
 
-There is a global variable defined in `$OS161_SRC/kern/include/current.h` named
-`curthread`, which is a pointer to the kernel data structure of current thread.
-Two different threads definitely have different thread structures, which makes
-it a good enough thread identifier.
+There is a global variable defined in `$OS161_SRC/kern/include/current.h`
+named `curthread`, which is a pointer to the kernel data structure of current
+thread. Two different threads definitely have different thread structures
+(hence different pointers), which makes the pointer to thread structure a good
+enough thread identifier.
 
 ### Reentrant Lock
 
