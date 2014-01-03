@@ -33,8 +33,8 @@ manager leaves.
 
 So, two rules for rwlock:
 
-1. Multiple readers can in the critical section at the same time
-2. One and only one writers can in the critical section at any time
+1. Multiple readers can be in the critical section at the same time
+2. One and only one writer can in the critical section at any time
 
 ### Starvation
 
