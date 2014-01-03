@@ -57,7 +57,7 @@ since there is a write waiting before them!
 
 There are many ways to implement rwlock. You can use any of the semaphore, cv or 
 lock. Here I introduce one using semaphore and lock. It's very simple, yet has
-the limitation that only support support at most a  certain number of readers in
+the limitation that only support at most a  certain number of readers in
 the critical section.
 
 Let's imagine the critical section as a set of resources. The initial capacity
