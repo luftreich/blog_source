@@ -89,3 +89,7 @@ Intent actualIntent = Intent.createChooser(emailIntent, "Send email to PhoneLab"
 actualIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 context.startActivity(actualIntent);
 ```
+
+[conductor]: https://play.google.com/store/apps/details?id=edu.buffalo.cse.phonelab.harness.participant&hl=en
+[nb]: http://developer.android.com/reference/android/app/Notification.Builder.html
+[pi]: http://developer.android.com/reference/android/app/PendingIntent.html
