@@ -73,10 +73,10 @@ Then we prepare the intent for launch email app.
 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
 emailIntent.setType("text/plain");
 String messageBody =
-"========================\n" +
-"  Optional debug info   \n" +
-"========================\n" +
-"Please describe your problems here.\n\n";
+    "========================\n" +
+    "  Optional debug info   \n" +
+    "========================\n" +
+    "Please describe your problems here.\n\n";
 String uriText = "mailto:" + Uri.encode(PHONELAB_HELP_EMAIL) + "?subject="
     + Uri.encode("OTA Update Problem") + "&body=" + Uri.encode(messageBody);
 emailIntent.setData(Uri.parse(uriText));
