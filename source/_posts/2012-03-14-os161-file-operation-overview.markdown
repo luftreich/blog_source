@@ -76,7 +76,7 @@ respectively. (Defined in `$OS161_SRC/kern/include/kern/unistd.h` as
 - **fd space is process specific**, i.e. different process may get the same
 file descriptor that represent different files
 
-So, to maintain each process's opened file information, we add a new filed to
+So, to maintain each process's opened file information, we add a new field to
 `struct thread`
 
 ``` c
@@ -86,13 +86,13 @@ struct fdesc* t_fdtable[OPEN_MAX];
 
 Now you may figure out why there isn't a fd filed in `struct fdesc`, since its
 index is the fd! So when we need to allocate a file descriptor, we just need
-to scan the `t_fdtable` (from `STDERR_FILENO+1` of course), and found a available 
+to scan the `t_fdtable` (from `STDERR_FILENO+1` of course), find an available 
 slot (`NULL`) and use it. Also, since it's a `struct thread` field, it's process 
 specific.
 
 Does the `t_fdtable` look familiar to you? Yes, it's very similar to our
 process array, only that the later is system-wise. (Confused? See 
-[my previous post on fork](/2012/03/11/os161-fork-system-call)
+[my previous post on fork](/2012/03/11/os161-fork-system-call))
 
 
 ### `t_fdtable` Management and Special Files
