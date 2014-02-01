@@ -7,8 +7,8 @@ categories: [os161]
 tags: [bmake, ctags, gdb, syscall]
 ---
 
-Here are some practice that will hopefully make you fell more comfortable and
-more productive when you poking with os161 syscalls.
+Here are some practice that will hopefully make you feel more comfortable and
+more productive when you poking around with os161 syscalls.
 
 <!-- more -->
 
