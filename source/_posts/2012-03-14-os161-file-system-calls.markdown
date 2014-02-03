@@ -142,8 +142,6 @@ used due to alignment.
 So in the switch branch of `sys_lseek`, we should first pack (`$a2:$a3`) into a 64-bit
 variable, say `sys_pos`. Then we use `copyin` to copy `whence` from user stack (`tf->tf_sp+16`).
 
-Here is a code snippet demonstrating how to do this:
-
 
 ### Get 64-bit return value of `sys_lseek`
 
@@ -155,6 +153,7 @@ need to copy the low 32-bit of `sys_lseek`'s return value to $v1, and high
 
 
 Here is a code snippet demonstrating the above idea:
+
 ``` c
 case SYS_lseek: 
 {
@@ -181,4 +180,3 @@ case SYS_lseek:
     break;
 }
 ```
-
