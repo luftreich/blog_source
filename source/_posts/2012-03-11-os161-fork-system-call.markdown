@@ -52,7 +52,7 @@ yourself, `thread_fork` will call it for you. You can get the pointer of child's
 thread structure by the last argument of `thread_fork`.
 
 
-### Parent's and Child's fort return different values
+### Parent's and Child's `fork` return different values
 
 This is the trickiest part. You may want to take a look at the end of `syscall`
 to find out the convention of return values. That is: _on success, `$a3` stores
