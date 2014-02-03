@@ -102,7 +102,7 @@ We can see that in `dup2(oldfd, newfd)`:
 - After `dup2`, `oldfd` and `newfd` points to the same file. But we can call 
 `close` on any of them and do not influence the other.
 
-- After `dup21`, all read/write to `newfd` will be actually performed on
+- After `dup2`, all read/write to `newfd` will be actually performed on
 `oldfd`. (Of course, they points to the same file!!)
 
 - If `newfd` is previous opened, it should be closed in `dup2` ( according
