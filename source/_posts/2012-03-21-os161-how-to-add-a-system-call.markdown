@@ -32,7 +32,7 @@ We'll discuss the details of this instruction later.
 After this, we check `$a3` value to see if the syscall is successful and store
 the error number (`$v0`) to `errno` if not.
 
-`$OS161_SRC/build/user/libc/syscall.S` is generated according to
+`$OS161_SRC/build/user/lib/libc/syscall.S` is generated according to
 `$OS161_SRC/user/lib/libc/arch/mips/syscall-mips.S` during compiling, and this
 file is the actual file that be compiled and linked to user library. We can
 see that besides the `SYSCALL` macro and the `__syscall` code, declarations of
