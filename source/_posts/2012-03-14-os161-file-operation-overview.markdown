@@ -34,8 +34,8 @@ details about a file:
 - File name. We don't actually need this, but just in case. For example, we
 may want to print a file's name when debuging.
 
-- Open flags. We need to keep the flags passed by `open` so that we can check
-permissions on following read or write
+- Open flags. We need to keep the flags passed by `open` so that later on we can check
+permissions on read or write.
 
 - File offset. We definitely need this.
 
@@ -58,6 +58,8 @@ struct fdesc{
     struct vnode* vn; 
 };
 ```
+
+__Note__: The name `fdesc` is a bit confusing. Maybe a better name would be `fhandle`.
 
 Why we didn't record the file's fd? Please see next section.
 
