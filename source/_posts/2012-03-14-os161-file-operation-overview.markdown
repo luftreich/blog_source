@@ -68,7 +68,7 @@ Why we didn't record the file's fd? Please see next section.
 
 There are some common rules about file descriptor:
 
-- 0, 1 and 2 a special file descriptors. They are stdin, stdout and stderr
+- 0, 1 and 2 are special file descriptors. They are stdin, stdout and stderr
 respectively. (Defined in `$OS161_SRC/kern/include/kern/unistd.h` as
 `STDIN_FILENO`, `STDOUT_FILENO` and `STDERR_FILENO`)
 
@@ -88,7 +88,7 @@ struct fdesc* t_fdtable[OPEN_MAX];
 
 Now you may figure out why there isn't a fd filed in `struct fdesc`, since its
 index is the fd! So when we need to allocate a file descriptor, we just need
-to scan the `t_fdtable` (from `STDERR_FILENO+1` of course), find an available 
+to scan the `t_fdtable` (from `STDERR_FILENO+1`, of course), find an available 
 slot (`NULL`) and use it. Also, since it's a `struct thread` field, it's process 
 specific.
 
@@ -110,19 +110,21 @@ Since parent and child thread are supposed to share the same file table, so
 when copy file tables, remember to increase each file's reference counter.
 
 **Console files (std in/out/err) are supposed to be opened "automatically" when 
-a thread is created**, i.e. user themselves don't need to open them. Note that **each
-thread should open these files separably** , otherwise console I/O won't behave
-correctly.
+a thread is created**, i.e. user themselves don't need to open them.
 
 At first glance, `thread_create` would be a intuitive place to  initialize them.
-Yes, we can do that. But be noted that when the first thread is created, the console 
-is even not bootstrapped yet, so if you open console files in `thread_create`, it'll
+Yes, we can do that. But be noted that _when the first thread is created, the console 
+is even not bootstrapped yet_, so if you open console files in `thread_create`, it'll
 fail (silently blocking...) at that time.
 
 Another way is that we can lazily open the console files: when reading or
 writing console files, we first check if they've already been opened 
 , then open it if not. (This method seems not clean, but it works...)
 
+__Update__: The _right_ way to do this is to initialize console in `runprogram`,
+because that's where the first user thread is born. And later user threads will
+just inherits the three file handles of console from then on.
+
 BTW, **how to open console**? The path name should be "con:", flags should
 be: `O_RDONLY` for stdin, `O_WRONLY` for stdout and stderr; options should be `0664`
-(Note the zero prefix, it's a octal number)
+(Note the zero prefix, it's a octal number).
