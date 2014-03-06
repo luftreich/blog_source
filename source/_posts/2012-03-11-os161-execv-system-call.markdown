@@ -7,12 +7,12 @@ categories: [os161]
 tags:  [execv, syscall]
 ---
 
-Basically, `execv` do more or less the same thing with `runprogram` resided in
+Basically, `execv` do more or less the same thing with `runprogram` in
 `$OS161_SRC/kern/syscall/runprogram.c`. The overall flow of `sys_execv` are:
 
-  1. _Copy arguments into kernel buffer_
+  1. _Copy arguments from user space into kernel buffer_
   2. Open the executable, create a new address space and load the elf into it
-  3. _Copy the arguments into user stack_
+  3. _Copy the arguments from kernel buffer into user stack_
   4. Return user mode using `enter_new_process`
 
 <!-- more -->
@@ -26,8 +26,8 @@ The first argument is `progname` (e.g., `/testbin/argtest`), and the second
 argument is `uargs`, it's an array of pointers, each pointer points to a user
 space string. The last pointer of `uargs` is `NULL`.
 
-Since we don't know how many arguments are there in `uargs`, we need to copy
-the pointers one by one using `copyin` until we encounter a `NULL`.
+Since we don't know how many arguments are there in `uargs`, we need *to copy
+the pointers one by one using `copyin`* until we encounter a `NULL`.
 
 
 ### Copy arguments into kernel buffer
@@ -52,7 +52,7 @@ Note that `kargv[i]` stores the _offset_ of the i'th arguments within the
 
 Why user stack, not anywhere else? Because it's the only space we know for
 sure. We can use `as_define_stack` to get the value of initial stack pointer
-(normally `0x8000000`, aka `USER_SPACE_TOP`). So what we do is 
+(normally `0x80000000`, aka `USER_SPACE_TOP`). So what we do is 
 
  1. Fill `kargv[i]` with actual user space pointer, and 
  2. Copy `kargv` array into the stack 
