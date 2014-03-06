@@ -28,7 +28,7 @@ So, let's get started.
 
 Trap frame (`struct trapframe`) records the exact state (e.g. registers, stack, 
 etc.) of parent when
-it call fork. Since we need the child exactly the same with parent (excluding
+it call fork. Since we need the child exactly the same with parent (except for
 return value of fork), we need child thread to start run with parent's trap
 frame.
 
@@ -44,7 +44,7 @@ a `struct addrspace` for you and also copy the address space contents, so you
 don't need to call `as_create` by yourself. 
 
 
-### Creating Child Thread
+### Create Child Thread
 
 `thread_fork` will create a new child thread structure and copy various fields
 of current thread to it. Again, you don't need to call `thread_create` by
@@ -73,7 +73,7 @@ another is parent's address space!
 
 Once we've decided what to pass, how to pass is depend on your preference. One
 way is to pass trapframe pointer as the `data1`, and address space pointer as
-`data2` (with explicit type-case of course). Another way may be we pass trapframe pointer
+`data2` (with explicit type-case, of course). Another way may be we pass trapframe pointer
 as `data1`, and assign the address space pointer to `$a0` since we know `fork` takes
 no arguments.
 
@@ -92,8 +92,8 @@ activate it using `as_activate`. Finally, we need to call `mips_usermode`
 to return to user mode. But before that, we need to_ copy the modified
 trapframe from kernel heap to stack_ since `mips_usermode` check this
 (`KASSERT(SAME_STACK(cpustacks[curcpu->c_number]-1, (vaddr_t)tf))`. How? Before
-call `mips_usermode`, just declare a `struct trapframe` and copy the content
-into it, then use its address as parameter to call `mips_usermode`
+call `mips_usermode`, just declare a `struct trapframe` (note: not pointer) and copy the content
+into it, then use its address as parameter to call `mips_usermode`.
 
 ### Synchronization
 
