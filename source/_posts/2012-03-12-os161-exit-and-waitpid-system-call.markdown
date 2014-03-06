@@ -28,7 +28,11 @@ around.
 At first glance, the logic of `waitpid` is trivial. Yes, it's indeed in
 terms of the "core code": Just acquire the exitlock and then see if the
 process has exited, then wait it exit using `cv_wait` on exitcv and get
-it's exitcode. But it turns out that most the code of `waitpid` is argument
+it's exitcode. Here I use `cv` to coordinate child and parent process. Or you can
+use semaphore with initial count 0: child will `V` the semaphore when it exits,
+and parent will `P` the semaphore on `waitpid`.
+
+But it turns out that most the code of `waitpid` is argument
 checking! More arguments means more potential risks from user space.
 Sigh~ Anyway, we are doing kernel programming. And just take a look at
 `$OS161_SRC/user/testbin/badcall/bad_waitpid.c` and you'll know what I mean.
@@ -36,13 +40,9 @@ Sigh~ Anyway, we are doing kernel programming. And just take a look at
 So basically, we need to check:
 
 - Is the status pointer properly aligned (by 4) ?
-
 - Is the status pointer a valid pointer anyway (NULL, point to kernel, ...)?
-
 - Is options valid? (More flags than `WNOHANG | WUNTRACED` )
-
 - Does the waited pid exist/valid?
-
 - If exist, are we allowed to wait it ? (Is it our child?)
 
 And also, after successfully get the exitcode, don't forget to destroy the
