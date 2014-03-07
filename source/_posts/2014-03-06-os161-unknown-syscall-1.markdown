@@ -42,7 +42,7 @@ Here is the MIPS assembly instruction that "calls" a function `foo`.
 jal foo
 ```
 
-`jal` stands for "Jump And Link`, it will first save `$epc+8` into register
+`jal` stands for "Jump And Link", it will first save `$epc+8` into register
 `$ra` (return address), and set `$epc` to whatever address `foo` are, to "jump"
 to that function.
 
@@ -59,7 +59,8 @@ jr ra
 
 `jr` stands for "Jump Register". It just set `$epc` to whatever value in that
 register. In this case, since `$ra` contains the value of return address, the
-`foo` functions "returns".
+`foo` functions "returns" to the next instruction after `jal` in callee.
+ 
 
 ### GCC Optimization
 
@@ -117,7 +118,8 @@ $ os161-objdump -d bin/true > true.S
 ```
 
 So `main` calls `exit` (0x400108), `exit` calls `_exit` (0x40013c). __Note that
-at this point, `$ra=$epc+8=0x400144`. `_exit` fails, `$v0` is set to -1, and
+at this point, `$ra=$epc+8=0x400144`__. `_exit` fails (because we haven't
+implemented it yet), `$v0` is set to -1, and
 returns to `$ra`. The memory between 0x400140 and 0x400150 are filled by 0,
 which is `nop` instruction in MIPS. So the CPU get all the way down to the
 `__syscall` function at 0x400150, and execute the `syscall` instruction. At this
