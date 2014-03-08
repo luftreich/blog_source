@@ -108,6 +108,14 @@ thread set everything up._
 So we need to disable interrupts before `thread_fork` using `splhigh`, and
 restore the old interrupt level using `splx` after parent thread is done.
 
+__Update__: Disable interrupt does not necessarily stop child from running. If
+you adopt this approach, you need to use some synchronization primitives to
+coordinate between parent and child.
+
+Or better, you can modify `thread_fork`, copy whatever you need to copy (e.g.,
+file table) before `thread_make_runnable`. Thus you won't have synchronization
+issue.
+
 
 [unix_fork]: http://linux.die.net/man/2/fork
 [fork_wiki]: http://en.wikipedia.org/wiki/Fork_(operating_system)
