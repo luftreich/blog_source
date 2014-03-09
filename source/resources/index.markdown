@@ -5,11 +5,9 @@ sharing: false
 footer: false
 ---
 
-## Resources
-
 These are various resources I collected.
 
-### OS/161
+## OS/161
 [OS/161 manual page][os161_man]
 
 Courses using OS/161
@@ -17,6 +15,9 @@ Courses using OS/161
  - [CS161 at Harvard][harvard]
  - [CS350 at Waterloo][waterloo]
  - [CSC369 at Toronto][toronto]
+
+<hr/>
+{% include post/revision.html %}
 
 [os161_man]: /resources/os161/man/index.html
 [waterloo]: https://www.student.cs.uwaterloo.ca/~cs350
