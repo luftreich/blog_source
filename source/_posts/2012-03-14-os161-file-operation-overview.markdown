@@ -117,10 +117,6 @@ Yes, we can do that. But be noted that _when the first thread is created, the co
 is even not bootstrapped yet_, so if you open console files in `thread_create`, it'll
 fail (silently blocking...) at that time.
 
-Another way is that we can lazily open the console files: when reading or
-writing console files, we first check if they've already been opened 
-, then open it if not. (This method seems not clean, but it works...)
-
 __Update__: The _right_ way to do this is to initialize console in `runprogram`,
 because that's where the first user thread is born. And later user threads will
 just inherits the three file handles of console from then on.
