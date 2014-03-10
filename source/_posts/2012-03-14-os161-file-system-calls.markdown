@@ -51,31 +51,10 @@ As usual, before do anything, first check the parameters.
 The main work here is using `VOP_READ` or `VOP_WRITE` together with `struct
 iovec` and `struct uio`. `kern/syscall/loadelf.c` is a good start point.
 **However, we need to initialize the `uio` for read/write for user space
-buffers**.
+buffers**. That means the `uio->uio_segflg` should be `UIO_USERSPACE`.
 
-``` c
-struct iovec iov;
-struct uio u;
-
-iov.iov_ubase = ubuf;
-iov.iov_len = len;
-u.uio_iov = &iov;
-u.uio_iovcnt = 1;
-u.uio_offset = fdesc->offset;
-u.uio_resid = len;
-u.uio_segflg = UIO_USERSPACE;
-u.uio_rw = UIO_READ;
-u.uio_space = curthread->t_addrspace;
-
-if ((err = VOP_READ(fdesc->vn, &u)) != 0) {
-    return err;
-}
-fdesc->offset = u.uio_offset;
-
-if (ret != NULL) {
-    *ret = len - u.uio_resid;
-}
-```
+Note that `uio->uio_resid` is how many bytes left after the IO operation. So you
+can calculate how many bytes are actually read/written by `len - uio->uio_resid`.
 
 Since we've carefully handled std files when initialization. Here we just treat
 them as normal files and pay no special attention to them.
@@ -150,33 +129,3 @@ Also from the comment, we know that a 64-bit return value is stored in
 after the `switch` statement, `retval` will be assigned to $v0, so here we just
 need to copy the low 32-bit of `sys_lseek`'s return value to $v1, and high
 32-bit to `retval`.
-
-
-Here is a code snippet demonstrating the above idea:
-
-``` c
-case SYS_lseek: 
-{
-    off_t pos = 0;
-
-    /* pack (a2:a3) to pos */
-    pos |= a2;
-    pos <<= 32;
-    pos |= a3;
-
-    /* get whence from user stack */
-    int whence;
-    if ((err = copyin((const_userptr_t)(tf->tf_sp+16), &whence, sizeof(whence))) != 0) {
-        break;
-    }
-
-    off_t ret;
-    err = sys_lseek(&ret, (int)tf->tf_a0, pos, whence);
-    /* unpack ret to (v0:v1) */
-    if (!err) {
-        retval = ret>>32;
-        tf->tf_v1 = ret;
-    }
-    break;
-}
-```
