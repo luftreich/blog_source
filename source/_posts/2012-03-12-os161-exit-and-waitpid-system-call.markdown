@@ -58,8 +58,8 @@ we need to do is find our `struct process` entry using `curthread->t_pid`.
 And then indicate that "I've exited" and fill the exitcode. The only
 thing to note that the exitcode must be maked using the MACROs in
 `$OS161_SRC/kern/include/kern/wait.h`. Suppose user passing in `_exitcode`, then we need
-to set the real `exitcode` as `_MKWAIT_exit(_exitcode)`.
+to set the real `exitcode` as `_MKWAIT_EXIT(_exitcode)`.
 
 And if we are smarter, we can first check if parent exist or if parent has
 exited, then we even don't bother fill the exitcode since no one cares! Anyway,
-it's just a tiny shortcut.
+it's just a tiny shortcut, and totally optional.
