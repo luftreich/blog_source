@@ -1,0 +1,113 @@
+---
+layout: post
+title: "OS161 Debug Tips"
+date: 2014-04-08 20:45
+comments: true
+categories: ["os161"]
+tags: ["gdb", "debugging"]
+---
+
+In doing OS161 assignments, if you don't know how to use GDB and how to use it
+efficiently, you're screwed, and will die very ugly. It's a very important skill
+to use GDB to identify what's wrong with your code. That's the first step
+towards to fix the bug.
+
+<!--more-->
+
+### db: Connect to sys161 with less key strokes
+
+The canonical way in GDB to connect to sys161 is using this command:
+
+```
+target remote unix:.sockets/gdb
+```
+
+You really don't want to type that every time you restart sys161. You may
+wondered: **there got be a better way to do this**. YES, there is.
+
+Create a file named `.gdbinit` inside your `~/root` directory, or wherever you
+launch GDB. In that file, put these code:
+
+```
+def db
+    target remote unix:.sockets/gdb
+end
+```
+
+Then in GDB, a simple `db` command will connect GDB to sys161.
+
+How it works? Well, we defined a custom command called `db`, which does the
+dirty work. When GDB starts, it'll read the file named `.gdbinit` in current
+working directory if it exists. So GDB will recognize the `db` command and know
+what to do when we type `db`.
+
+
+### backtrace: WTF just happened?
+
+Have you ever seen the kernel panic out of nowhere and you got no clue what just
+happened? One of the purposes of the `panic` function is to provide an universal
+endpoint of all kinds of messy errors. So when your kernel does panic, you know
+where to back trace the bug.
+
+So whenever your kernel panics, you don't panic. Just set a breakpoint at the
+`panic` function and do a `backtrace` when your kernel got there. You'll find
+out exactly which line of code trigger the panic. Then you can fix it.
+
+{% img /images/panic.png center %}
+
+### until: Jump out of the loop
+
+Have you ever try to jump out of a loop and just want to see the suspicious part
+after a loop? For example, you use a `for` loop to initialize the file table, or
+process table, or whatever table. And you're pretty sure the loop is OK. But
+when you step into that function, you may need to hopelessly press `next` N
+times to pass the loop.
+
+Of course there is a better way to do this! You can use the `until` command of
+GDB, which, as per GDB help message, "execute until the program reaches a source line greater than the current
+or a specified location (same args as break command) within the current frame."
+
+Basically, it'll set a one-time breakpoint at the line you specified, and
+execute until the CPU reach that line of code. 
+
+### finish: Get the hell out of here
+
+In short, this command will let GDB keep executing until current function
+returns. It's useful when you accidentally step into a function which you know
+works well. Or at the end of the function is a `for` loop which you're sure is
+OK.
+
+### display: Show me this, period.
+
+You may know how to use `print` command to print out variable values to make
+sure everything is as expected. But there're some variables you want to examine
+every time you hit a break point. For example, you may want to show the
+process's pid whenever you hit `sys_fork` or `sys_waitpid`.
+
+So, instead of type the `print` command every time, you can use the `display`
+command. Basically, the usage is the same with `print`, just that every time you
+hit a breakpoint, GDB will display the variable's value.
+
+### condition: Only stop here if...
+
+So you know how to set breakpoint, but some times you only want to hit that
+breakpoint when certain things happens. For example, when you debug `sys_lseek`
+using `/testbin/fileonlytest`, you may want to also check your `sys_write` as
+well, because it also updates the file handle offset. But if you set a break
+point at `sys_write`, you'll hit it every time the user program print something,
+i.e., write stdout, which is not very interesting, and kind of annoying because
+you don't really care about it.
+
+The solution is to use `condition` command. Basically it allows you to set a
+conditional breakpoint so GDB will only stop at the breakpoint if the condition
+is true.
+
+For example, I only want to step into `sys_write` when the `fd` is 3. I can do
+this:
+
+{%img /images/condition.png center %}
+
+
+If you have any other GDB tricks that you think is really awesome, welcome to
+comment below and I'd be happy to include them here.
+
