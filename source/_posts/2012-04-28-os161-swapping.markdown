@@ -72,6 +72,11 @@ Then the file will be created under the root directory.
 From my experience, store pages in normal file could be two times faster in
 terms of read/write bandwidth.
 
+**Update**: Actually, I didn't realize that we can actually change the RPM of
+the disks to make swapping faster then write to `emufs`. So my suggestion would
+be: use disk to store swapped pages and set RPM to a large enough value in
+`sys161.conf` (e.g., 28800).
+
 For the same reason why we can not open consoles in `thread_create`, you can not 
 do this in `vm_bootstrap` since at that point, VFS system 
 was not initialized yet (see `$OS161_SRC/kern/startup/main.c` for boot sequence, 
