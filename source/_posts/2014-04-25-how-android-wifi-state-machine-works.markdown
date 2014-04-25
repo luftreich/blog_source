@@ -101,19 +101,19 @@ event.
 
 ### Android Scan Interval
 
-Here is the statistics of scan interval distribution collected on 129 Nexus S phones for
-about 5 months.
+Here is the statistics of scan interval distribution collected on 129 Nexus S
+phones for about 5 months.
 
 {% img center /images/scan_interval_stats.png %}
 
-We can see that there are 4 peaks in the distribution. The peak around 15 seconds is
-due to wpa_supplicant scan interval, and the peak around 300 is due to
-framework periodic scan. The peak around 60 seconds is not much clear yet,
+We can see that there are 4 peaks in the distribution. The peak around 15
+seconds is due to wpa_supplicant scan interval, and the peak around 300 is due
+to framework periodic scan. The peak around 60 seconds is not much clear yet,
 probably due to the scan interval when P2P is connected.
 
 The interesting fact is actually the peak within 2 seconds. It seems most of the
-scan results are clustered together in a small time windows (1~2 seconds).
-This is because when the driver is scanning, it'll report every time it detects
-one AP. So in one scan, multiple scan result event will be triggered. And
-every time when there is a low level scan result event, Android will report the
-complete updated scan result list.
+scan results are clustered together in a small time windows (1~2 seconds).  This
+is because when the driver is scanning, it'll report every time it detects one
+AP. So in one scan, multiple scan result event will be triggered. And every time
+when there is a low level scan result event, Android will report the complete
+updated scan result list.
