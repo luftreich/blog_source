@@ -9,26 +9,24 @@ tags: [vm, coremap]
 
 The first concern of OS161 virtual memory system is how to manage physical
 pages. Generally, we can pack a physical page's information into a structure
-(called `struct page`) and **use this struct to represent a physical page**. 
-**We use an array of `struct page` to keep all physical pages information.** 
-This array, aka, **coremap**, will be the most important data structure in this lab.
+(called `struct coremap_entry`) and **use this struct to represent a physical page**. 
+**We use an array of `struct coremap_entry` to keep all physical pages information.** 
+This array, aka, **coremap**, will be one of the most important data structure in this lab.
 
 <!-- more -->
 
-### What should we store in page structure?
+### What should we store in coremap entry structure?
 
 For each physical page, we want to know:
 
-- Where is this page mapped?
+ - Where is this page mapped? (For swapping)
+ - What's this pages status? (free, fixed, clean, dirty...)
+ - Other info (e.g. need by paging algorithm)
 
-- What's this pages status? (free, clean, dirty...)
-
-- Other info (e.g. need by paging algorithm)
-
-So the definition of `struct page` may look like this:
+So the definition of `struct coremap_entry` may look like this:
 
 ```
-struct page { 
+struct coremap_entry { 
     /* where is paged mapped to */
     struct addrspace* as; 
     vaddr_t va;
@@ -36,10 +34,7 @@ struct page {
     /* page state */ 
     page_state_t state;
 
-    /* for paging algorithm 
-     * I use FIFO paging, so a timestamp will be suffice    
-     */
-    uint64_t timestamp; 
+    /* other info for paging algorithm  */
 };
 ```
 
@@ -47,14 +42,14 @@ A page can have for different states, as shown below.
 
 {% img center /images/2012-04-24-page-state.png %}
 
-This diagram is quite clear. Several points though:
+This diagram is quite clear. Several points to note:
 
-- Once a physical page is allocated, its state is DIRTY, not CLEAN. Since this
-page do not have a copy in swap file (disk). Remember that in a virtual memory
-system, memory is just a cache of disk.
+ - When a physical page is first allocated, its state is DIRTY, not CLEAN. Since this
+ page do not have a copy in swap file (disk). Remember that in a virtual memory
+ system, memory is just a cache of disk.
 
-- For some reason, we may want to always keep a certain page in memory, e.g.
-    - kernel pages, since these pages are direct mapped 
+ - For some reason, we may want to always keep a certain page in memory, e.g.
+    - kernel pages, since these pages are direct mapped.
     - user stack and code segment pages which we already knew will be frequently accessed. 
 
   So we have a special state called "fixed", means that **we'll never swap out these 
@@ -66,12 +61,12 @@ system, memory is just a cache of disk.
 We need to initiate our coremap in `vm_bootstrap`. First, we need to find out
 how many physical pages in system. We can do this using `ram_getsize`. There
 is a big trick here. Since we will only know the physical page number, i.e.
-coremap array length at runtime, so we'd better just define a `struct page`
+coremap array length at runtime, so we'd better just define a `struct coremap_entry`
 pointer and allocate the actually array at runtime after we got the physical
 page number, rather than use a statically defined array with some MACRO like
 `MAX_PHY_PAGE_NUM`. So at first glance, we may write:
 
-```
+```c
 paddr_t firstaddr, lastaddr; 
 ram_getsize(&firstaddr, &lastaddr); 
 page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
@@ -97,16 +92,16 @@ other malloc routines. A possible solution may be:
 
 ```
 ram_getsize(&firstaddr, &lastaddr); 
-page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
+total_page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
 /* pages should be a kernel virtual address !!  */
-pages = (struct page*)PADDR_TO_KVADDR(firstaddr); 
-freeaddr = firstaddr + page_num * sizeof(struct page); 
+coremap = (struct coremap_entry*)PADDR_TO_KVADDR(firstaddr); 
+freeaddr = firstaddr + page_num * sizeof(struct coremap_entry); 
 ```
 
 Now we allocated our core map just between `firstaddr` and `freeaddr`, and
 [`freeaddr`, `lastaddr`] will be system's free memory.
 
-Then we initialize the `pages` array, we need to mark any pages between [0,
+Then we initialize the coremap array, we need to mark any pages between [0,
 `freeaddr`) as fixed, since this memory contains important kernel code and
 data, or memory mapped I/Os. And we just mark pages between [`freeaddr`,
 `astaddr`] as free.
