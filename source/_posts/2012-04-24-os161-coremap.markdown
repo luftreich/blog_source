@@ -69,8 +69,8 @@ page number, rather than use a statically defined array with some MACRO like
 ```c
 paddr_t firstaddr, lastaddr; 
 ram_getsize(&firstaddr, &lastaddr); 
-page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
-pages =(struct page*) kmalloc(page_num * sizeof(struct page)); 
+total_page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
+coremap =(struct coremap_entry*) kmalloc(total_page_num * sizeof(struct coremap_entry)); 
 ```
 
 **But the above code will definitly fail**. 
@@ -90,7 +90,8 @@ data structures, e.g., locks, before we call `ram_getsize`**. Then we call
 `kmalloc`, we must **allocate our coremap manually**, without invoking any
 other malloc routines. A possible solution may be:
 
-```
+```c
+paddr_t firstpaddr, lastpaddr;
 ram_getsize(&firstaddr, &lastaddr); 
 total_page_num = ROUNDDOWN(lastaddr, PAGE_SIZE) / PAGE_SIZE; 
 /* pages should be a kernel virtual address !!  */
