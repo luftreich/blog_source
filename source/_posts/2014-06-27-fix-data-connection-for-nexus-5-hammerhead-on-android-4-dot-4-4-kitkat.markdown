@@ -38,8 +38,14 @@ should be, so once you saw the LTE icon, it's safe to hit skip.
 I've put the complete vendor binaries as well as gapps and `apns-conf.xml` in
 this [git repo][repo].
 
-{% img center /images/data-activate.png %}
-{% img center /images/about-phone.png %}
+{% img center /images/data-activate.png 540 960 %}
+{% img center /images/about-phone.png 540 960 %}
+
+## UPDATE (Jun 28, 2014)
+
+To be able to sign the added vendor apks properly, I've added corresponding
+`Android.mk` in each proprietary directory. Also, `TimeService.apk` from qcom
+should override the one from gapps.
 
 
 [build]: https://source.android.com/source/build-numbers.html
