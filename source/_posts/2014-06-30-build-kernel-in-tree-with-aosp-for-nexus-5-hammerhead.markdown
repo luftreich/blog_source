@@ -82,6 +82,11 @@ After all above changes, __do a `make clobber` to make sure we have a clean
 slate__, otherwise, some strange errors may strike you.  Then just build AOSP in
 normal way and kernel should get built on the fly.
 
+Here is a snapshot of the kernel version I built. The version name is no longer
+`d59db4e` because I made some changes.
+
+{% img center /images/kernel.png 540 960 %}
+
 
 ### Credits
 
