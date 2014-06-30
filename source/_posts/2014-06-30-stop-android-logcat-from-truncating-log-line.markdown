@@ -59,6 +59,8 @@ header.len = min_t(size_t, iocb->ki_left, LOGGER_ENTRY_MAX_PAYLOAD);
 
 This is where the truncating happens! 
 
+### Fix
+
 `LOGGER_ENTRY_MAX_PAYLOAD` is defined in
 `kernel/drivers/stagging/android/logger.h` as `4076`, which I guess is
 (4096-20), where 20 is the log header structure size.
