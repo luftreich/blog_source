@@ -59,7 +59,7 @@ header.len = min_t(size_t, iocb->ki_left, LOGGER_ENTRY_MAX_PAYLOAD);
 
 This is where the truncating happens! 
 
-### Fix
+### How to Fix
 
 `LOGGER_ENTRY_MAX_PAYLOAD` is defined in
 `kernel/drivers/stagging/android/logger.h` as `4076`, which I guess is
@@ -72,8 +72,8 @@ enough.
 
 Also, `logger` device maintains a ring buffer for each log device, which are
 defined in `kernel/drivers/stagging/android/logger.c`. The default buffer size
-is 256K. I also changed the buffer size for `main` device to 4MB, while leave
-others unchanged. (I tried 32MB yet apparently it's too large because the
+is 256K. I changed the buffer size for `main` device to 4MB, while leave
+others unchanged. (I also tried 32MB, yet apparently it's far too large and the
 kernel refused to boot up.)
 
 
