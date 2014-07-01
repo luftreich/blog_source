@@ -49,18 +49,18 @@ Two changes need to be made for kernel to be successfully built in-tree.
  - Use `zImage-dtb` instead of `zImage` as target. 
 
  First, change `TARGET_PREBUILT_INT_KERNEL` (~line 8).
-```
+```diff
 -TARGET_PREBUILT_INT_KERNEL := $(KERNEL_OUT)/arch/arm/boot/zImage
 +TARGET_PREBUILT_INT_KERNEL := $(KERNEL_OUT)/arch/arm/boot/zImage-dtb
 ```
    Then change corresponding make rule (~line 47).
-```
+```diff
 $(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(KERNEL_HEADERS_INSTALL)
 -       $(MAKE) -C kernel O=../$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi-
 +       $(MAKE) -C kernel O=../$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi- zImage-dtb
 ```
  - Do not build modules (~line 48-51).
-```
+```diff
 -       $(MAKE) -C kernel O=../$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi- modules
 -       $(MAKE) -C kernel O=../$(KERNEL_OUT) INSTALL_MOD_PATH=../../$(KERNEL_MODULES_INSTALL) INSTALL_MOD_STRIP=1 ARCH=arm CROSS_COMPILE=arm-eabi- modules_install
 -       $(mv-modules)
