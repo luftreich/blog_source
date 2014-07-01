@@ -21,13 +21,13 @@ per the [official Android build numbers page][build], and followed the
 after flashing to device, I found there was no data connection (3G/LTE). Of
 course Google apps were also missing but it should be easy to fix.
 
-After banging my head for a while, I came across [this post from Jameson][jam],
-which shed some light on what's happening. Apparently, the vendor binaries from
-[Google's driver page][driver] do not work properly out of the box. Some was
-missing, such as `OmaDmclient.apk`, and others were different from those in
-factory image. So based on Jameson's vendor binary repos ([lge][lge],
-[qcom][qcom]), I updated them with the binaries from [factory image][factory] of
-Android 4.4.4 (KTU84P). Yet still no luck.
+After banging my head for a while, I came across [this post from Jameson][jam]
+and [this thread][thread], which shed some light on what's happening.
+Apparently, the vendor binaries from [Google's driver page][driver] do not work
+properly out of the box. Some was missing, such as `OmaDmclient.apk`, and others
+were different from those in factory image. So based on Jameson's vendor binary
+repos ([lge][lge], [qcom][qcom]), I updated them with the binaries from 
+[factory image][factory] of Android 4.4.4 (KTU84P). Yet still no luck.
 
 Finally, one of the comments in that post led me to this [xda thread][xda]
 talking about APN fixes for Sprint users, which seems to be just I missed. So I
@@ -57,3 +57,4 @@ should override the one from gapps.
 [qcom]: https://github.com/jamesonwilliams/vendor_qcom_hammerhead
 [xda]: http://forum.xda-developers.com/google-nexus-5/general/fix-sprint-data-to-custom-roms-t2541924
 [repo]: https://github.com/jhshi/aosp.hammerhead.4.4.4_r1.vendor
+[thread]: https://groups.google.com/forum/?fromgroups#!topic/android-building/SjdAhFHYj-Q
