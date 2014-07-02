@@ -34,8 +34,10 @@ Bus 002 Device 010: ID 18d1:d001 Google Inc.
 
 The first part of the ID (18d1) is supposed to be the vendor ID, and second part
 (d001) is product ID. However, from [Google's vendor list][vendor], LG's vendor
-ID should be 1004, not 18d1. It seems for Nexus devices, vendor and product IDs are not
-just the normal "vendor" IDs. What the hell, just add them to the udev rules:
+ID should be 1004, where as Google's vendor ID is 18d1.
+
+
+What the hell, just add them to the udev rules:
 
 ```
 # adb protocol on recovery for Nexus 5
@@ -53,7 +55,6 @@ List of devices attached
 And this approach can be extended to any cases where either adb or fastboot has
 permission issues. Just do a `lsusb` and find out the actual vendor and product
 ID, and add them to your udev rules.
-
 
 [guide]: https://source.android.com/source/initializing.html#configuring-usb-access
 [vendor]: http://developer.android.com/tools/device.html#VendorIds
