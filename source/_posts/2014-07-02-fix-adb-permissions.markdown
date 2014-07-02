@@ -46,7 +46,7 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d001", MODE="0600", 
 After that, unplug the device and plug it in again. It should be
 recognized, like so:
 
-```base
+```bash
 $ adb devices
 List of devices attached
 060fb526f0eca244        recovery
