@@ -76,5 +76,14 @@ is 256K. I changed the buffer size for `main` device to 4MB, while leave
 others unchanged. (I also tried 32MB, yet apparently it's far too large and the
 kernel refused to boot up.)
 
+## UPDATE
+
+To make Android logcat tool working properly, we'll also need to modify
+`system/core/include/log/logger.h` in AOSP source tree, which is a mirror to the
+`logger.h` in kernel. `LOGGER_ENTRY_MAX_PAYLOAD` needs to be the same with the
+one in kernel, and `LOGGER_ENTRY_MAX_LEN` needs to be a bit larger than
+`LOGGER_ENTRY_MAX_PAYLOAD`. In my case, I set the former to 65516 and latter to
+`(64*1024)`.
+
 
 [log]: http://elinux.org/Android_Logging_System
