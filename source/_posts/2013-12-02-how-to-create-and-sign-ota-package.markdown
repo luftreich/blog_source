@@ -7,8 +7,8 @@ categories: ["Android"]
 tags: ["ota", "signapk", "zip"]
 ---
 
-I'm currently maintaining the [Conductor App][conductor] for [PhoneLab
-testbed][phonelab]. One of the core tasks performed by conductor is to perform
+I'm currently maintaining the [Conductor App][conductor] for 
+[PhoneLab testbed][phonelab]. One of the core tasks performed by conductor is to perform
 system OTA update, so that we can push platform changes to our participants,
 either to fix bugs, or to do system level experiments (libc, Dalvik VM, etc.).
 
@@ -118,8 +118,8 @@ Up to this point, the OTA package we just created should be able to applied
 successfully on custom recoveries like CWM, in which the signature
 verification is turned off by default.
 
-However, to automate the OTA process, we're using the [Android
-RecoverySystem][recovery] to reboot the phone and apply the update, in that
+However, to automate the OTA process, we're using the 
+[Android RecoverySystem][recovery] to reboot the phone and apply the update, in that
 case, the signature verification is turned on. So we need to sign the package
 with proper keys, which are _platform_ keys.
 
