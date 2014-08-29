@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sign Issues related to OTA Update"
+title: "Signing Issues related to OTA Update"
 date: 2014-08-28 15:37:50 -0400
 comments: true
 categories: ['android']
