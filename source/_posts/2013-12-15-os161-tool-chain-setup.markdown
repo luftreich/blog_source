@@ -126,10 +126,10 @@ the `make` think those files doesn't need to be rebuilt. Because:
  - And we don't really care the docs...
 
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should have some `mips-harvard-os161-*` binary files in the
 `tools/bin` directory.
-{%endribbonp%}
+
 
 ### GCC
 
@@ -149,10 +149,10 @@ Note that:
  - `make -j 8` means use 8 threads when compile. Usually this will speed up the
    compilation process quite a little bit.
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should see `mips-harvard-os161-gcc` in the `tools/bin`
 directory.
-{%endribbonp%}
+
 
 
 ### GDB
@@ -183,10 +183,10 @@ You probably need to install the `libncurses5-dev` package.
 sudo apt-get install libncurses5-dev
 ```
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should see `mips-harvard-os161-gdb` in the `tools/bin`
 directory.
-{%endribbonp%}
+
 
 ### SYS161
 
@@ -200,10 +200,10 @@ make install
 cd ..
 ```
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should see `sys161`, `hub161`, `stat161` and `trace161`
 symlinks in the `tools/bin` directory. 
-{%endribbonp%}
+
 
 
 ### Bmake
@@ -227,10 +227,10 @@ sh /home/jhshi/projects/courses/os161/toolbuild/bmake/mk/install-mk /home/jhshi/
 
 Just do the commands _one by one_ in the order given.
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should see `bmake` symlink in `tools/bin` directory. And a
 bunch of `*.mk` files in `tools/share/mk` directory.
-{%endribbonp%}
+
 
 ### Create Symbolic Links
 
@@ -246,10 +246,10 @@ sh -c 'for i in mips-*; do ln -s $i os161-`echo $i | cut -d- -f4-`; done'
 Note that the symbol around `echo $i $ cut -d- -f4-` is the key that under 
 {%key Esc %} (the same key with tilde (`~`)).
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 After this step, you should see a bunch of `os161-*` symlinks in `tools/bin`
 directory. 
-{%endribbonp%}
+
 
 ### PATH Setup
 
@@ -264,7 +264,7 @@ Add this line to your `.bashrc`.
 export PATH=$PATH:~/projects/courses/os161/tools/bin
 ```
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 Close current terminal and open an new one. Type this commands, and check if the
 output matches.
 ```bash
@@ -273,7 +273,7 @@ which sys161
 which bmake
 # should be something like /home/jhshi/projects/courses/os161/tools/bin
 ```
-{%endribbonp%}
+
 
 
 ### Configure OS161
@@ -326,10 +326,10 @@ Note that:
  - We copy the sys161 configuration example to the `root` directory. This
    configuration file is needed by `sys161` - the simulator.
 
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 Go to `~/projects/courses/os161/root`, you should see some directories there, e.g.,
 `bin`, `hostbin`, `lib`, `man`, etc.
-{%endribbonp%}
+
 
 ### Compile and Run the Kernel
 
@@ -346,7 +346,7 @@ Now let's fire up the kernel.
 cd ~/projects/courses/os161/root
 sys161 kernel
 ```
-{%ribbonp warning Checkpoint %}
+#### Checkpoint
 You should see outputs like this:
 ```bash
 sys161: System/161 release 1.99.06, compiled Dec 15 2013 17:42:02
@@ -375,7 +375,7 @@ con0 at lser0
 cpu0: MIPS r3000
 OS/161 kernel [? for menu]:
 ```
-{%endribbonp%}
+
 
 
 ### Resources
