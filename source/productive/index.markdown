@@ -58,16 +58,18 @@ virtually all my projects (even this blog!)
 
 ### Mechanical Keyboard
 
-Trust me, you'll never want to use any membrane keyboards once you used to
+You'll never want to use any membrane keyboards once you used to
 the mechanical ones. They just makes you loving typing!
 
 [How to Choose the Best Mechanical Keyboard (and Why You'd Want To)][link]
 
 I'm currently using [Ducky 1008][ducky] at home and 
-[CoolerMaster QuickFire Rapid][quickfire] at office. Both of them have brown
-switches, yet feels slightly different.
+[DasKeyboard Professional 4][das] at office. Both of them have brown
+switches, yet feels slightly different. I used to use
+[CM Storm Quickfire Rapid][quicifire] at office, it's tiny and sweet, but Das
+keyboard feels just slightly better.
 
-I had a [Razer Black Widow 2013][razer] for two month, before it heated
+I once had a [Razer Black Widow 2013][razer] for two month, before it heated
 up and died. That will probably be _the last_ Razer product I'll ever have.
 
 <hr/>
@@ -89,3 +91,4 @@ up and died. That will probably be _the last_ Razer product I'll ever have.
 [razer]: http://www.razerzone.com/minisite/blackwidow/the_razer_blackwidow
 [git]: http://git-scm.com
 [bash-vi]: http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/
+[das]: http://www.daskeyboard.com/daskeyboard-4-professional/
