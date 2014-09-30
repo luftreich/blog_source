@@ -50,7 +50,8 @@ problems.
 
 After poking around Android Settings app's source code, I found there is one
 internal interface called `IUsageStats`. It's defined in
-`framework/base/core/java/com/android/internal/app/IUsageStats.aidl`
+`framework/base/core/java/com/android/internal/app/IUsageStats.aidl` inside AOSP
+tree. You can find it [here][aosp]
 
 ```java
 package com.android.internal.app;
@@ -67,7 +68,8 @@ interface IUsageStats {
 }
 ```
 Where `PkgUsageStats` class is defined in 
-`framework/base/core/java/com/android/internal/os/PkgUsageStats.java`. 
+`framework/base/core/java/com/android/internal/os/PkgUsageStats.java`
+[link][aosp2]. 
 
 ```java
 public class PkgUsageStats implements Parcelable {
@@ -123,6 +125,23 @@ catch (Exception e) {
 Here I use Java reflection to get the class of `android.os.ServiceManager`,
 which is also internal interface.
 
+After that, you just get all the package statistics like so:
+
+```java
+HashMap<String, PkgUsageStats> stats = new HashMap<String, PkgUsageStats>();
+if (mUsageStatsService != null) {
+    try {
+        PkgUsageStats[] pkgUsageStats = mUsageStatsService.getAllPkgUsageStats();
+        for (PkgUsageStats s : pkgUsageStats) {
+            stats.put(s.packageName, s);
+        }
+    }
+    catch (Exception e) {
+        Log.e(TAG, "Failed to get package usage stats: " + e);
+    }
+}
+```
+
 ### Background Service Running Time
 
 It seems that Settings->Apps->Running Apps are already showing the information
@@ -134,5 +153,21 @@ After inspecting the source code of Settings app, I found that information is
 coming from `ActivityManager.RunningServiceInfo`. There is a field named
 `activeSince`, which is the time when the service was first made active.
 
+## === UPDATE ===
+
+It seems the reflection need system permission (I haven't tested yet). Since we
+build our own platform, it's not a problem--we just sign our apk with the platform
+key and declare our app's user as system in `AndroidManifest.xml`.
+
+```xml
+android:sharedUserId="android.uid.system"
+```
+
+But if you don't have the platform key, then this approach probably won't work.
+The other way I can think of is you run the `dumpsys` command and parse the
+output, but it still requites root permission.
+
 
 [dumpsys]: http://source.android.com/devices/tech/input/dumpsys.html
+[aosp]: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/com/android/internal/app/IUsageStats.aidl
+[aosp2]: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/com/android/internal/os/PkgUsageStats.java
