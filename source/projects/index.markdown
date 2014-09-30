@@ -9,9 +9,10 @@ footer: false
 
 #### PhoneLab
 
-[PhoneLab][phonelab] is a large scale smart phone testbed operated at UB. Current we have 288
-participants using the phone ([Galaxy Nexus][gn]) we provided as their primary 
-phone. PhoneLab is capable of application and system level smart phone research.
+[PhoneLab][phonelab] is a large scale smart phone testbed operated at UB.
+Currently we have ~220 UB faculty, staff and students carrying instrumented
+[Nexus 5][nexus5] as their primary phone. PhoneLab is capable of both
+application and platform level experiments.
 
 I'm currently the maintainer of the [Conductor][conductor] app, which is
 responsible for:
@@ -22,19 +23,19 @@ responsible for:
  - Perform Platform OTA update
  - And a lot more!
 
-#### Smart Phone Assisted Wifi AP Configuration
+I also prepared this year's platform image for Nexus 5.
 
-IEEE 802.11 WLAN, commonly known as WiFi, only has 
-[three non-overlapping channels at 2.4GHz band][wiki]. This causes severe channel collision and
-interference problems, especially in environment with dense Access Point (AP)
-deployment.
+#### PocketSniffer: Crowdsourcing Access Network Spectrum Allocation Using Smartphones
 
-We're trying to let smart phones give feedback to AP about its wireless
-environment, so that we can configure the APs with optimal channel and power
-allocation.
+Smartphones are _always on_, yet mostly _idle_, making them ideal vantage point
+to monitoring wireless networks. In this project, we're exploring the
+possibilities to let smartphones collect network data for both: 1)
+long-term network monitoring purpose; and 2) short-term spectrum utilization
+information to help improve the network performance of nearby devices.
+
 
 ## Course
-#### [CSE589 Modern Network Concepts][network]
+#### [CSE589 Modern Network Concepts, Fall 2013][network]
 
 This is an core course of CSE graduate program, with several challenging
 projects. You can found [several blogs][network_blog] on this project.
@@ -52,12 +53,13 @@ online automatic grading system, which is so cool.
 
 You can found [a bunch of blogs][os161_blog] on this project.
 
-#### CSE596 Introduction to the Theory of Computation
+#### CSE596 Introduction to the Theory of Computation, Fall 2013
 
 I composed an collection of glossaries, theorems, corollaries, etc., at 
 [this git repo][cs_theory].
 
 ## Other
+
 #### Octopress Plugins
 This is blog is powered by [Octopress][octopress]. I wrote a few Octopress
 plugins that make my blogging easier.
@@ -92,3 +94,4 @@ plugins that make my blogging easier.
 [revision_blog]: /2013/11/17/post-revision-plugin-for-octopress/
 [cs_theory]: https://github.com/jhshi/course.cs_theory
 [notes]: https://github.com/jhshi/course.network.note
+[nexus5]: http://www.google.com/nexus/5/
