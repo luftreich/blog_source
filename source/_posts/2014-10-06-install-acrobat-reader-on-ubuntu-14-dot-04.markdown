@@ -11,6 +11,8 @@ Recently I need to install Adobe Acrobat Reader on couple of my Ubuntu boxes.
 The process is full of black magic that sometimes you can't find the documents
 anywhere. Hopefully this post will make the process less a pain.
 
+<!--more-->
+
 
 ### Install Dependencies
 
