@@ -30,25 +30,25 @@ Note that since the Acrobat Reader is 32-bit application, so if you're on
 to install besides the ones in this list.
 
 ```bash
-sudo apt-get install\
-libgtk2.0-0:i386\
-libnss3-1d:i386\
-libnspr4-0d:i386\
-lib32nss-mdns\
-libxml2:i386\
-libxslt1.1:i386\
-libstdc++6:i386\
-libcanberra-dev:i386\
-libcanberra-gtk-dev:i386\
-libcanberra-gtk-module:i386\
-gtk2-engines:i386\
-gtk2-engines-*:i386\
-gnome-themes-standard:i386\
-unity-gtk2-module:i386\
-libpangoxft-1.0.0:i386\
-libpangox-1.0.0:i386\
-libidn11:i386\
-dconf-gsettings-backend:i386
+sudo apt-get install \
+    libgtk2.0-0:i386 \
+    libnss3-1d:i386 \
+    libnspr4-0d:i386 \
+    lib32nss-mdns \
+    libxml2:i386 \
+    libxslt1.1:i386 \
+    libstdc++6:i386 \
+    libcanberra-dev:i386 \
+    libcanberra-gtk-dev:i386 \
+    libcanberra-gtk-module:i386 \
+    gtk2-engines:i386 \
+    gtk2-engines-*:i386 \
+    gnome-themes-standard:i386 \
+    unity-gtk2-module:i386 \
+    libpangoxft-1.0.0:i386 \
+    libpangox-1.0.0:i386 \
+    libidn11:i386 \
+    dconf-gsettings-backend:i386
 ```
 
 ### Download the Deb Package
