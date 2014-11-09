@@ -8,9 +8,10 @@ tags: ['ruby', 'gem', 'cut', 'xargs']
 ---
 
 I use Octopress to manage my blogs, which rely on correct ruby gem version to
-work. Although Octopress use Bundler to manage the gem dependencies, a simple
-`bundle install` does not work out of box. Since everything works fine on one of
-my machines, I decided to replicate the exact ruby/gem setup of that machine.
+work. Although Octopress use Bundler to manage the gem dependencies, sometimes a
+simple `bundle install` does not work out of box. Since everything works fine on
+one of my machines, I decided to replicate the exact ruby/gem setup of that
+machine.
 
 <!--more-->
 
@@ -42,6 +43,7 @@ using white space and only get the second (gem name) and third (version) parts,
 finally we substitute white space with `--version`, similar as above.
 
 ```
+....
 Using stringex 1.4.0
 Using bundler 1.7.3
 Your bundle is complete!
@@ -63,6 +65,9 @@ Then install all the Gems, here we do not install document for sake of time.
 ```bash
 $ cat gemlist | xargs -L 1 sudo gem install --no-ri --no-rdoc
 ```
+
+Here we use `-L 1` option to tell `xargs` to treat each line as a separate
+command.
 
 Finally, before you do `rake` in your project, remember to delete the
 `Gemfile.lock` file, it may contain some obsolete gems and misleading bundler.
