@@ -92,10 +92,40 @@ Here is a snapshot of the kernel version I built. The version name is no longer
 
 Thanks to [this blog from Jameson][jam] for describing most of it.
 
+## UPDATE
 
+The above setup works fine as long as you didn't
+[specify a separate output directory][out], since we assume the kernel output
+directory is `../$(KERNEL_OUT)` in `make` options. Apparently, it will fail if the
+`out` directory is not the default one.
+
+The kernel [Makefile][makefile] support two ways of specify output directory
+(see comments starting from line 79). One is to use `O=` command line option,
+another is to set the `KBUILD_OUTPUT` environment variable.
+
+Since we use `-C` option to first switch working directory, `O=` options is a
+bit tricky to use, so we leverage the `KBUILD_OUT` variable.
+
+We first figure out the absolute path of the `KERNEL_OUT`
+
+```makefile
+FULL_KERNEL_OUT := $(shell readlink -e $(KERNEL_OUT))
+```
+
+Then we set `KBUILD_OUT` before calling `make`:
+
+```makefile
+$(KERNEL_CONFIG): $(KERNEL_OUT)
+    env KBUILD_OUTPUT=$(FULL_KERNEL_OUT) \
+    $(MAKE) -C kernel ARCH=arm CROSS_COMPILE=arm-eabi- $(KERNEL_DEFCONFIG)
+```
+
+This way will work no matter where the actual AOSP output directory is.
 
 
 [google]: https://source.android.com/source/building-kernels.html
 [so]: http://stackoverflow.com/questions/21574066/unable-to-checkout-msm-source-code-for-android-hammerhead-kernel
 [patch]: https://github.com/jamesonwilliams/device_lge_hammerhead/commit/fe714801e33b38af4a81ddc3f40c3fdc53583f66
 [jam]: http://nosemaj.org/howto-build-android-kitkat-nexus-5
+[out]: https://source.android.com/source/initializing.html#using-a-separate-output-directory
+[makefile]: https://android.googlesource.com/kernel/msm/+/android-msm-hammerhead-3.4-kitkat-mr1/Makefile
