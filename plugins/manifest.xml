@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="origin" fetch="https://github.com/" />
+  <default revision="master" remote="origin" sync-j="8" />
+
+  <project path="jelyll-ditaa" name="matze/jekyll-ditaa" />
+  <project path="octopress-category-list" name="alswl//octopress-category-list" />
+  <project path="octopress-chuck-norris" name="alestanis/octopress-chuck-norris" />
+  <project path="octopress-keyboardkey" name="rcmdnk/octopress-keyboardkey" />
+  <project path="octopress-page-view" name="jhshi/octopress-page-view" />
+  <project path="octopress-popular-posts" name="jhshi/octopress-popular-posts" />
+  <project path="octopress-post-revision" name="jhshi/octopress-post-revision" />
+  <project path="octopress-tag-cloud" name="robbyedwards/octopress-tag-cloud" />
+  <project path="octopress-tag-pages" name="robbyedwards/octopress-tag-pages" />
+</manifest>
