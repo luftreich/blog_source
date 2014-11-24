@@ -132,7 +132,7 @@ java -jar signapk.jar -w platform.x509.pem platform.pk8 myupdate.zip myupdate-si
 
 Note that:
 
- - We need the `-w` flat to sign the whole zip file.
+ - We need the `-w` flag to sign the whole zip file.
  - The sequence of the two key files: pem file goes first, then the pk8 file.
 
 This will generate the final OTA package, `myupdate-signed.zip`, which WILL pass
