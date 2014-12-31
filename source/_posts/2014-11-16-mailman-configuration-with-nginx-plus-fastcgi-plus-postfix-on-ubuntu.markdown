@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mailnan Configuration with Nginx+FastCGI+Postfix on Ubuntu"
+title: "Mailman Configuration with Nginx+FastCGI+Postfix on Ubuntu"
 date: 2014-11-16 13:02:25 -0500
 comments: true
 categories: ['Linux']
