@@ -56,22 +56,6 @@ it requires you to set up and SVN server to work. Thus I didn't use
 Now with Git, everything feels so easy and painless. And I use it to manage
 virtually all my projects (even this blog!)
 
-### Mechanical Keyboard
-
-You'll never want to use any membrane keyboards once you used to
-the mechanical ones. They just makes you loving typing!
-
-[How to Choose the Best Mechanical Keyboard (and Why You'd Want To)][link]
-
-I'm currently using [Ducky 1008][ducky] at home and 
-[DasKeyboard Professional 4][das] at office. Both of them have brown
-switches, yet feels slightly different. I used to use
-[CM Storm Quickfire Rapid][quicifire] at office, it's tiny and sweet, but Das
-keyboard feels just slightly better.
-
-I once had a [Razer Black Widow 2013][razer] for two month, before it heated
-up and died. That will probably be _the last_ Razer product I'll ever have.
-
 <hr/>
 {% include post/revision.html %}
 
