@@ -46,21 +46,6 @@ threads share the same copy of this bookkeeping data structure (e.g., after `for
 
 - Actual pointer to the file's `struct vnode`
 
-So a file may be represented by the below structure in kernel space.
-
-``` c
-struct fdesc{ 
-    char name[MAX_FILENAME_LEN]; 
-    int flags; 
-    off_t offset; 
-    int ref_count; 
-    struct lock* lock; 
-    struct vnode* vn; 
-};
-```
-
-__Note__: The name `fdesc` is a bit confusing. Maybe a better name would be `fhandle`.
-
 Why we didn't record the file's fd? Please see next section.
 
 
