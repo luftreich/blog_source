@@ -25,7 +25,7 @@ For each physical page, we want to know:
 
 So the definition of `struct coremap_entry` may look like this:
 
-```
+```c
 struct coremap_entry { 
     /* where is paged mapped to */
     struct addrspace* as; 
